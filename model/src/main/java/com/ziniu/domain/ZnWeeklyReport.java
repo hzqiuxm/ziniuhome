@@ -1,6 +1,6 @@
 package com.ziniu.domain;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Copyright © 2016年 author. All rights reserved.
@@ -9,18 +9,18 @@ import java.sql.Timestamp;
  * @Date 2017/3/1 0001 13:31
  */
 public class ZnWeeklyReport {
-    private int id;
+    private Integer id;
     private String reportWriter;
     private String reportThisWeek;
     private String reportNextWeek;
     private String reportDifficulty;
-    private Timestamp reportTime;
+    private Date reportTime;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -56,11 +56,11 @@ public class ZnWeeklyReport {
         this.reportDifficulty = reportDifficulty;
     }
 
-    public Timestamp getReportTime() {
+    public Date getReportTime() {
         return reportTime;
     }
 
-    public void setReportTime(Timestamp reportTime) {
+    public void setReportTime(Date reportTime) {
         this.reportTime = reportTime;
     }
 
@@ -86,7 +86,7 @@ public class ZnWeeklyReport {
 
     @Override
     public int hashCode() {
-        int result = id;
+        Integer result = id;
         result = 31 * result + (reportWriter != null ? reportWriter.hashCode() : 0);
         result = 31 * result + (reportThisWeek != null ? reportThisWeek.hashCode() : 0);
         result = 31 * result + (reportNextWeek != null ? reportNextWeek.hashCode() : 0);

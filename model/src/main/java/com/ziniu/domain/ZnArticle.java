@@ -1,6 +1,6 @@
 package com.ziniu.domain;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Copyright © 2016年 author. All rights reserved.
@@ -9,7 +9,7 @@ import java.sql.Timestamp;
  * @Date 2017/3/1 0001 13:30
  */
 public class ZnArticle {
-    private int id;
+    private Integer id;
     private Integer pcategory;
     private Integer category;
     private String imgUrl;
@@ -17,12 +17,12 @@ public class ZnArticle {
     private String secondTitle;
     private String summary;
     private String content;
-    private Timestamp postTime;
+    private Date postTime;
     private String author;
     private Integer commentCount;
     private Integer readCount;
     private Integer smCount;
-    private Timestamp lastUpdateTime;
+    private Date lastUpdateTime;
     private Integer accountId;
     private String accountName;
     private Integer lastAccountId;
@@ -33,11 +33,11 @@ public class ZnArticle {
     private String relCompanyName;
     private String notes;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -97,11 +97,11 @@ public class ZnArticle {
         this.content = content;
     }
 
-    public Timestamp getPostTime() {
+    public Date getPostTime() {
         return postTime;
     }
 
-    public void setPostTime(Timestamp postTime) {
+    public void setPostTime(Date postTime) {
         this.postTime = postTime;
     }
 
@@ -137,11 +137,11 @@ public class ZnArticle {
         this.smCount = smCount;
     }
 
-    public Timestamp getLastUpdateTime() {
+    public Date getLastUpdateTime() {
         return lastUpdateTime;
     }
 
-    public void setLastUpdateTime(Timestamp lastUpdateTime) {
+    public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
     }
 
@@ -263,7 +263,7 @@ public class ZnArticle {
 
     @Override
     public int hashCode() {
-        int result = id;
+        Integer result = id;
         result = 31 * result + (pcategory != null ? pcategory.hashCode() : 0);
         result = 31 * result + (category != null ? category.hashCode() : 0);
         result = 31 * result + (imgUrl != null ? imgUrl.hashCode() : 0);

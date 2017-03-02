@@ -1,6 +1,6 @@
 package com.ziniu.domain;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Copyright © 2016年 author. All rights reserved.
@@ -9,18 +9,18 @@ import java.sql.Timestamp;
  * @Date 2017/3/1 0001 13:30
  */
 public class ZnDiscuss {
-    private int id;
+    private Integer id;
     private Integer discussReportId;
     private String discussCritic;
     private String discussReply;
     private String discussMessage;
-    private Timestamp discussTime;
+    private Date discussTime;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -56,11 +56,11 @@ public class ZnDiscuss {
         this.discussMessage = discussMessage;
     }
 
-    public Timestamp getDiscussTime() {
+    public Date getDiscussTime() {
         return discussTime;
     }
 
-    public void setDiscussTime(Timestamp discussTime) {
+    public void setDiscussTime(Date discussTime) {
         this.discussTime = discussTime;
     }
 
@@ -88,7 +88,7 @@ public class ZnDiscuss {
 
     @Override
     public int hashCode() {
-        int result = id;
+        Integer result = id;
         result = 31 * result + (discussReportId != null ? discussReportId.hashCode() : 0);
         result = 31 * result + (discussCritic != null ? discussCritic.hashCode() : 0);
         result = 31 * result + (discussReply != null ? discussReply.hashCode() : 0);

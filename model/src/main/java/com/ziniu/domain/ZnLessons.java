@@ -1,6 +1,6 @@
 package com.ziniu.domain;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Copyright © 2016年 author. All rights reserved.
@@ -9,21 +9,21 @@ import java.sql.Timestamp;
  * @Date 2017/3/1 0001 13:30
  */
 public class ZnLessons {
-    private int id;
+    private Integer id;
     private String lessonName;
     private String lessonType;
     private String lessonDes;
-    private Timestamp createTime;
-    private Timestamp updateTime;
+    private Date createTime;
+    private Date updateTime;
     private String isCycle;
     private String state;
     private String notes;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,19 +51,19 @@ public class ZnLessons {
         this.lessonDes = lessonDes;
     }
 
-    public Timestamp getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Timestamp createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    public Timestamp getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Timestamp updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 
@@ -113,7 +113,7 @@ public class ZnLessons {
 
     @Override
     public int hashCode() {
-        int result = id;
+        Integer result = id;
         result = 31 * result + (lessonName != null ? lessonName.hashCode() : 0);
         result = 31 * result + (lessonType != null ? lessonType.hashCode() : 0);
         result = 31 * result + (lessonDes != null ? lessonDes.hashCode() : 0);

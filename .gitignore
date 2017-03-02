@@ -1,0 +1,13 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gradle/
+.idea/
+common/src/
+controller/build/
+controller/src/main/java/com/ziniu/controller/other/
+controller/src/main/resources/
+model/build/
+out/
+service/build/
+service/src/main/resources/
+web/build/
+web/src/main/java/com/ziniu/config/

@@ -51,6 +51,9 @@ author:
   name: 临江仙
   age:  32
 
+ziniu:
+  yinyoushiren: 临江仙
+
 #日志配置
 logging:
   level: error

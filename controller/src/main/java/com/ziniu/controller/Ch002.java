@@ -2,6 +2,7 @@ package com.ziniu.controller;
 
 
 
+import com.ziniu.controller.commons.CommonsProperties;
 import com.ziniu.domain.ZnUserBase;
 import com.ziniu.service.HelloServcice;
 import com.ziniu.service.ZnUserBaseService;
@@ -27,7 +28,8 @@ public class Ch002 {
     @Value("${book.name}")
     private String bookName;
 
-
+    @Autowired
+    private CommonsProperties commonsProperties;
     @Autowired
     private HelloServcice helloServcice;
     @Autowired
@@ -36,7 +38,8 @@ public class Ch002 {
     @RequestMapping("/qiuxm")
     String index() {
 
-        return "book name is " + bookName + " and book author is " + bookAuthor + helloServcice.sayHello();
+        return "book name is " + bookName + " and book author is " + bookAuthor + helloServcice.sayHello()
+                + " ziniu properties :" + commonsProperties.getYinyoushiren();
     }
 
     //spring Boot默认使用的json解析框架是jackson

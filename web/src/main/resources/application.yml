@@ -1,0 +1,29 @@
+spring:
+    application:
+        name: dev
+    datasource:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/znblog
+        username: root
+        password: 123456
+        type: com.alibaba.druid.pool.DruidDataSourceC3P0Adapter
+        filters: stat
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+
+    profiles:
+        active: dev
+
+debug: true
+mybatis:
+    mapperLocations: classpath:mapping/*.xml

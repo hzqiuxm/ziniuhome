@@ -1,0 +1,43 @@
+project(':web'){
+    apply plugin : 'war'
+//    apply plugin: "com.bmuschko.tomcat"
+}
+
+
+//buildscript {
+//    repositories {
+//        maven {
+//            url "https://plugins.gradle.org/m2/"
+//        }
+//    }
+//    dependencies {
+//        classpath "com.bmuschko:gradle-tomcat-plugin:2.2.4"
+//    }
+//}
+
+dependencies {
+    compile project(':controller')
+//    providedCompile(
+//            "javax:javaee-api:6.0",
+//            "javax.servlet:javax.servlet-api:3.1.0",
+//            "javax.servlet.jsp:jsp-api:2.2.1-b03"
+//    )
+//    runtime 'javax.servlet:jstl:1.1.2'
+
+//    def tomcatVersion = '7.0.47'
+////    compile group: 'org.apache.tomcat', name: 'tomcat-catalina', version: '8.0.32'
+//    tomcat "org.apache.tomcat:tomcat-catalina:${tomcatVersion}",
+//            "org.apache.tomcat:tomcat-coyote:${tomcatVersion}",
+//            "org.apache.tomcat:tomcat-jasper:${tomcatVersion}"
+}
+
+//    tomcat {
+//        httpPort = 8080
+//        httpsPort = 8091
+//        enableSSL = true
+//        contextPath = '/'
+//    }
+
+    war {
+        baseName = "znxz"
+    }

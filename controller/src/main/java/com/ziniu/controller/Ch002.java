@@ -4,8 +4,8 @@ package com.ziniu.controller;
 
 import com.ziniu.controller.commons.CommonsProperties;
 import com.ziniu.domain.ZnUserBase;
-import com.ziniu.service.HelloServcice;
-import com.ziniu.service.ZnUserBaseService;
+import com.ziniu.service.Impl.HelloServcice;
+import com.ziniu.service.Impl.ZnUserBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;

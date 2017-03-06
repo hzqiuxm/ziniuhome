@@ -18,4 +18,6 @@ public interface ZnUserBaseDao {
     int update(@Param("pojo") ZnUserBase pojo);
 
     List<ZnUserBase> findByUserName(@Param("userName")String userName);
+
+    ZnUserBase findbyId(@Param("id")Integer id);
 }

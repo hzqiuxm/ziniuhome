@@ -1,4 +1,4 @@
-package com.ziniu.service;
+package com.ziniu.service.Impl;
 
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;

@@ -1,5 +1,8 @@
 package com.ziniu.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Date;
 
 /**
@@ -8,7 +11,10 @@ import java.util.Date;
  * @Author 临江仙 hxqiuxm@163.com
  * @Date 2017/3/1 0001 13:31
  */
+@Entity
 public class ZnUserBase {
+    @Id
+    @GeneratedValue
     private Integer id;
     private String userName;
     private String password;

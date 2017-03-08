@@ -1,25 +1,27 @@
 project(':web'){
-    apply plugin : 'war'
-//    apply plugin: "com.bmuschko.tomcat"
+//    apply plugin : 'war'
+    apply plugin: "com.bmuschko.tomcat"
+    apply plugin: "jetty"
 }
 
 
-//buildscript {
-//    repositories {
-//        maven {
-//            url "https://plugins.gradle.org/m2/"
-//        }
-//    }
-//    dependencies {
-//        classpath "com.bmuschko:gradle-tomcat-plugin:2.2.4"
-//    }
-//}
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.bmuschko:gradle-tomcat-plugin:2.2.4"
+    }
+}
 
 dependencies {
     compile project(':controller')
+//    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 //    providedCompile(
-//            "javax:javaee-api:6.0",
-//            "javax.servlet:javax.servlet-api:3.1.0",
+//            "javax:javaee-
+//            "javax.servlet:javax.servlet-api:3.1.0",api:6.0",
 //            "javax.servlet.jsp:jsp-api:2.2.1-b03"
 //    )
 //    runtime 'javax.servlet:jstl:1.1.2'
@@ -37,7 +39,12 @@ dependencies {
 //        enableSSL = true
 //        contextPath = '/'
 //    }
+//providedCompile("org.springframework.boot:spring-boot-starter-tomcat")
+/*providedCompile("org.springframework.boot:spring-boot-starter-jetty")*/
 
-    war {
+    jar {
         baseName = "znxz"
     }
+//bootRun {
+//    addResources = true
+//}

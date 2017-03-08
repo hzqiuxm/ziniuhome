@@ -2,7 +2,7 @@
 #server.port=8443
 server:
   port: 9090
-
+#  context-path: /ziniu
 # SSL协议相关配置
 #server.ssl.key-store= .keystore
 #server.ssl.key-password= 123321
@@ -32,7 +32,15 @@ spring:
         testOnReturn: false
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
-
+    jpa:
+      database: mysql
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+        naming:
+          strategy: org.hibernate.cfg.DefaultComponentSafeNamingStrategy
+    jackson:
+      serialization: true
 
 #jms相关配置
 activemq:
@@ -56,4 +64,4 @@ ziniu:
 
 #日志配置
 logging:
-  level: error
+  level: debug

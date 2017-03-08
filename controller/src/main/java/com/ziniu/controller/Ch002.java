@@ -6,6 +6,7 @@ import com.ziniu.controller.commons.CommonsProperties;
 import com.ziniu.domain.ZnUserBase;
 import com.ziniu.service.Impl.HelloServcice;
 import com.ziniu.service.Impl.ZnUserBaseService;
+import com.ziniu.service.Interface.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -34,6 +35,8 @@ public class Ch002 {
     private HelloServcice helloServcice;
     @Autowired
     private ZnUserBaseService znUserBaseService;
+    @Autowired
+    private IUserService iUserService;
 
     @RequestMapping("/qiuxm")
     String index() {
@@ -61,9 +64,21 @@ public class Ch002 {
     @ResponseBody
     public String getUserInfo(@RequestParam("name") String name){
         System.out.println("name = " + name);
-        List<ZnUserBase> znUserBases;
-        znUserBases = znUserBaseService.getUser(name);
-        return znUserBases.get(0).getNickName();
+        ZnUserBase znUserBase = new ZnUserBase();
+        znUserBase.setUserName(name);
+        znUserBase = iUserService.getUserByCondition(znUserBase);
+        return znUserBase.getEmail();
+//          return "ok";
+    }
+
+    @RequestMapping(value = "/getname",method = RequestMethod.GET)
+    @ResponseBody
+    public String getname(@RequestParam("id") long id){
+
+        System.out.println("--------id = " + id);
+        ZnUserBase znUserBase = new ZnUserBase();
+        znUserBase = iUserService.getUserById((int) id);
+        return znUserBase.getNickName();
     }
 
     @RequestMapping(value = "/adduser",method = RequestMethod.GET)
@@ -81,7 +96,7 @@ public class Ch002 {
     public String showPerson(@RequestParam("spId") long spId){
 
         System.out.println("The spId is : " +spId);
-        if(100l == spId){
+        if(100L == spId){
             System.out.println("That's my number!");
         }
 

@@ -41,6 +41,10 @@ spring:
           strategy: org.hibernate.cfg.DefaultComponentSafeNamingStrategy
     jackson:
       serialization: true
+    thymeleaf:
+      cache: false
+#prefix 默认是在classpath:/templates/下
+#      prefix: classpath:/static/
 
 #jms相关配置
 activemq:

@@ -88,6 +88,10 @@ subprojects{
 // https://mvnrepository.com/artifact/org.codehaus.groovy/groovy
         compile group: 'org.codehaus.groovy', name: 'groovy', version: '2.4.9'
 
+        // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '1.5.2.RELEASE'
+
+
         // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
 //        compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.8.Final'
 

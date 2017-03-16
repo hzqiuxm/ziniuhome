@@ -111,6 +111,16 @@ public class Ch002 {
         return "query"+spId;
     }
 
+    @RequestMapping(value = "/getec",method = RequestMethod.GET)
+    public String getec(){
+
+        System.out.println("getec()...............");
+        int a;
+        a = 1/0;
+        return "Exception Test!";
+
+    }
+
 
     public static void main(String[] args) {
         SpringApplication.run(Ch002.class,args);

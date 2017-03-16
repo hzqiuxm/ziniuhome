@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Error页面</title>
+</head>
+<body>
+<h1> 错误原因是：<p th:text="${errorMessage}"></p></h1>
+<div>
+    <img src="/img/error.jpg"></img>
+</div>
+
+</body>
+</html>

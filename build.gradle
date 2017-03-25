@@ -1,6 +1,7 @@
 allprojects{
     group = 'org.znxz'
     version = '1.0'
+
 }
 
 buildscript {
@@ -47,9 +48,7 @@ subprojects{
 //        slf4jVersion = '1.7.7'
 //    }
 
-    // JVM 版本号要求
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+
 
     [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
@@ -67,6 +66,9 @@ subprojects{
         jcenter()
     }
 
+    // JVM 版本号要求
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
     dependencies {
 
@@ -90,6 +92,9 @@ subprojects{
 
         // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
         compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '1.5.2.RELEASE'
+//        https://mvnrepository.com/artifact/com.github.ulisesbocchio/jasypt-spring-boot
+        //Encrypt
+        compile group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot', version: '1.12'
 
 
         // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
@@ -162,10 +167,14 @@ subprojects{
 //        testCompile('org.springframework.boot:spring-boot-starter-test')
 //        testCompile('org.springframework.boot:spring-boot-starter-test')
         // https://mvnrepository.com/artifact/de.ruedigermoeller/fst
-//        compile group: 'de.ruedigermoeller', name: 'fst', version: '2.45'
+//        compile group: 'de.ruedigermoeller' , name: 'fst', version: '2.45'
 //        compile("org.springframework.boot:spring-boot-starter-jetty")
 
     }
+
+//    jar {
+//        baseName = "znxz"
+//    }
 }
 
 

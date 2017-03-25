@@ -17,7 +17,7 @@ spring:
         driverClassName: com.mysql.jdbc.Driver
         url: jdbc:mysql://localhost:3306/znblog?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
         username: root
-        password: 123456
+        password: ENC(HQSE0l3VV2Q17Mon8BQQMQ==)
         type: com.alibaba.druid.pool.DruidDataSourceC3P0Adapter
         filters: stat
         maxActive: 20
@@ -69,3 +69,6 @@ ziniu:
 #日志配置
 logging:
   level: debug
+jasypt:
+  encryptor:
+    password: ziniu

@@ -42,7 +42,7 @@ public class Ch002 {
     String index() {
 
         return "book name is " + bookName + " and book author is " + bookAuthor + helloServcice.sayHello()
-                + " ziniu properties :" + commonsProperties.getYinyoushiren();
+                + " ziniu's properties :" + commonsProperties.getYinyoushiren();
     }
 
     //spring Boot默认使用的json解析框架是jackson

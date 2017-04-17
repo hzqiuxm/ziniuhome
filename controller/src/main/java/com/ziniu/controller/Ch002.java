@@ -41,7 +41,8 @@ public class Ch002 {
     @RequestMapping("/qiuxm")
     String index() {
 
-        return "book name is " + bookName + " and book author is " + bookAuthor + helloServcice.sayHello()
+        System.out.println("-------");
+        return "book name is " + bookName + " and book222333 author is " + bookAuthor + helloServcice.sayHello()
                 + " ziniu's properties :" + commonsProperties.getYinyoushiren();
     }
 
@@ -66,6 +67,7 @@ public class Ch002 {
         System.out.println("name = " + name);
         ZnUserBase znUserBase = new ZnUserBase();
         znUserBase.setUserName(name);
+
         znUserBase = iUserService.getUserByCondition(znUserBase);
         return znUserBase.getEmail();
 //          return "ok";
@@ -114,7 +116,7 @@ public class Ch002 {
     @RequestMapping(value = "/getec",method = RequestMethod.GET)
     public String getec(){
 
-        System.out.println("getec()...............");
+        System.out.println("getec()..............");
         int a;
         a = 1/0;
         return "Exception Test!";

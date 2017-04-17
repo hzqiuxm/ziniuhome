@@ -7,7 +7,7 @@ allprojects{
 buildscript {
 
     ext {
-        springBootVersion = '1.5.1.RELEASE'
+        springBootVersion = '1.5.2.RELEASE'
         springloadedVersion = '1.2.6.RELEASE'
     }
 
@@ -78,8 +78,7 @@ subprojects{
         compile("org.springframework.boot:spring-boot-starter-data-jpa")
         //热部署解决方案devtools工具
 //        compile("org.springframework.boot:spring-boot-devtools")
-        // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
-//        compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '1.5.1.RELEASE'
+
         compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '1.2.0'
         testCompile("org.springframework.boot:spring-boot-starter-test")
 //        compile group: 'org.mybatis', name: 'mybatis', version: '3.4.2'
@@ -91,10 +90,12 @@ subprojects{
         compile group: 'org.codehaus.groovy', name: 'groovy', version: '2.4.9'
 
         // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
-        compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '1.5.2.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
 //        https://mvnrepository.com/artifact/com.github.ulisesbocchio/jasypt-spring-boot
         //Encrypt
         compile group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot', version: '1.12'
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+//        compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
 
 
         // https://mvnrepository.com/artifact/org.hibernate/hibernate-core

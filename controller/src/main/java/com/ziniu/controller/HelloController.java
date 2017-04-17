@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Date 2017/3/16 0016 15:20
  */
 @Controller
-@RequestMapping("/templates")
+@RequestMapping("/templates1")
 public class HelloController {
 
     @Autowired

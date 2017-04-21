@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 /**
@@ -38,6 +40,7 @@ public class Ch002 {
     @Autowired
     private IUserService iUserService;
 
+    @RolesAllowed("ROLE_ADMIN")
     @RequestMapping("/qiuxm")
     String index() {
 

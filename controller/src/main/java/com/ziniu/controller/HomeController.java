@@ -1,6 +1,8 @@
 package com.ziniu.controller;
 
 import com.ziniu.repository.Msg;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +23,16 @@ public class HomeController {
         return "home";
     }
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @RequestMapping("/login")
     public String login(){
-        System.out.println("=======");
+
+        logger.debug("This is a debug message");
+        logger.info("This is an info message");
+        logger.warn("This is a warn message");
+        logger.error("This is an error message");
+
         return "login";
     }
 

@@ -68,7 +68,13 @@ ziniu:
 
 #日志配置
 logging:
-  level: debug
+  file: D:/springboot.log
+  level:
+     com.ziniu.web : debug
+     com.ziniu.controller : debug
+
+
 jasypt:
   encryptor:
     password: ziniu
+

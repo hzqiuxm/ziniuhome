@@ -7,15 +7,18 @@ import com.ziniu.domain.ZnUserBase;
 import com.ziniu.service.Impl.HelloServcice;
 import com.ziniu.service.Impl.ZnUserBaseService;
 import com.ziniu.service.Interface.IUserService;
+import com.ziniu.service.jms.queue.MessageSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -39,6 +42,8 @@ public class Ch002 {
     private ZnUserBaseService znUserBaseService;
     @Autowired
     private IUserService iUserService;
+    @Autowired
+    MessageSender messageSender;
 
     @RolesAllowed("ROLE_ADMIN")
     @RequestMapping("/qiuxm")
@@ -46,7 +51,8 @@ public class Ch002 {
 
         System.out.println("-------");
         return "book name is " + bookName + " and book222333 author is " + bookAuthor + helloServcice.sayHello()
-                + " ziniu's properties :" + commonsProperties.getYinyoushiren();
+                + " ziniu's properties :" + commonsProperties.getYinyoushiren()
+                + commonsProperties.getDefaultjms() + commonsProperties.getGoldjms();
     }
 
     //spring Boot默认使用的json解析框架是jackson
@@ -60,6 +66,20 @@ public class Ch002 {
         contact.setEmail("hzqiuxm@163.com");
 
         return contact;
+
+
+    }
+
+    @RequestMapping("/sendMsg/{typeId}")
+    String sendMsg(@PathVariable("typeId") int typeId){
+
+        String message = "我是一条测试消息";
+        if(1==typeId){
+            message = "我是一条很重要的消息!";
+        }
+        messageSender.sendMessage(message,typeId);
+
+        return "消息发送成功!消息类型是：" + typeId;
 
 
     }
@@ -98,7 +118,8 @@ public class Ch002 {
     }
 
     @RequestMapping(value = "/showPerson",method = RequestMethod.GET)
-    public String showPerson(@RequestParam("spId") long spId){
+    @Validated
+    public String showPerson(@RequestParam("spId") @Size() long spId){
 
         System.out.println("The spId is : " +spId);
         if(100L == spId){

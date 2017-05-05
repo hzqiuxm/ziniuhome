@@ -1,14 +1,16 @@
 package com.ziniu;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.dialect.SpringStandardDialect;
-import org.thymeleaf.templateresolver.TemplateResolver;
+
+
+import javax.jms.Queue;
 
 /**
  * Copyright © 2016年 author. All rights reserved.
@@ -20,7 +22,14 @@ import org.thymeleaf.templateresolver.TemplateResolver;
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.ziniu"})
 @EnableEncryptableProperties
+@ServletComponentScan
 public class Application {
+
+
+    @Bean
+    public Queue queue() {
+        return new ActiveMQQueue("sample.queue");
+    }
 
 
 

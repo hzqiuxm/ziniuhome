@@ -19,19 +19,29 @@ spring:
         username: root
         password: ENC(HQSE0l3VV2Q17Mon8BQQMQ==)
         type: com.alibaba.druid.pool.DruidDataSourceC3P0Adapter
-        filters: stat
+        #初始化大小，最小，最大
         maxActive: 20
-        initialSize: 1
+        initialSize: 5
+        minIdle: 5
+        #配置获取连接等待超时时间，单位毫秒
         maxWait: 60000
-        minIdle: 1
+        #需要关闭空闲连接的检测时间，单位毫秒
         timeBetweenEvictionRunsMillis: 60000
+        #连接在池中最小生存时间，单位毫秒
         minEvictableIdleTimeMillis: 300000
         validationQuery: select 'x'
         testWhileIdle: true
         testOnBorrow: false
         testOnReturn: false
+        #打开PScache,并指定每个连接上PScache大小
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
+        #配置监控统计拦截的filters,去掉后监控界面的sql将无法统计，wall用于防火墙
+        filters: stat,wall,log4j
+        tomcat:
+          connection-properties: druid.stat.mergeSql=true;druid.stat.showSqlMills=5000
+
+
     jpa:
       database: mysql
       show-sql: true
@@ -43,6 +53,11 @@ spring:
       serialization: true
     thymeleaf:
       cache: false
+    activemq:
+      broker-url: failover:tcp://192.168.10.55:61616
+      in-memory: false
+
+
 #prefix 默认是在classpath:/templates/下
 #      prefix: classpath:/static/
 
@@ -65,6 +80,8 @@ author:
 
 ziniu:
   yinyoushiren: 临江仙
+  defaultjms: default_queue
+  goldjms: gold_queue
 
 #日志配置
 logging:
@@ -77,4 +94,5 @@ logging:
 jasypt:
   encryptor:
     password: ziniu
+
 

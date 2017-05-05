@@ -15,6 +15,16 @@ import org.springframework.stereotype.Component;
 public class CommonsProperties{
 
     private String yinyoushiren;
+    private String defaultjms;
+    private String goldjms;
+
+    public String getDefaultjms() {
+        return defaultjms;
+    }
+
+    public void setDefaultjms(String defaultjms) {
+        this.defaultjms = defaultjms;
+    }
 
     public void setYinyoushiren(String yinyoushiren){
 
@@ -23,5 +33,13 @@ public class CommonsProperties{
 
     public String getYinyoushiren(){
         return yinyoushiren;
+    }
+
+    public String getGoldjms() {
+        return goldjms;
+    }
+
+    public void setGoldjms(String goldjms) {
+        this.goldjms = goldjms;
     }
 }

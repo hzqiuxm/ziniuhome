@@ -15,9 +15,9 @@ spring:
     #数据源配置
     datasource:
         driverClassName: com.mysql.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/znblog?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
-        username: root
-        password: ENC(HQSE0l3VV2Q17Mon8BQQMQ==)
+        url: jdbc:mysql://rds0473qn129qi882964.mysql.rds.aliyuncs.com:3306/znxz?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+        username: qiuxm
+        password: ENC(GPD81o7A2J5Ic3KCDrN3/ZJ8cnrh8dcE)
         type: com.alibaba.druid.pool.DruidDataSourceC3P0Adapter
         #初始化大小，最小，最大
         maxActive: 20
@@ -67,7 +67,7 @@ activemq:
 
 #mybatis配置
 mybatis:
-    mapperLocations: classpath:mapping/*.xml
+    mapperLocations: classpath:com.ziuniu.mapper/*.xml
 
 #业务参数属性配置
 book:

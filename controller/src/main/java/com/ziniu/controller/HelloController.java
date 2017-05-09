@@ -21,8 +21,8 @@ public class HelloController {
     @RequestMapping("/hello")
     public String hello(){
 
-        String result = stringEncryptor.encrypt("123456");
-        System.out.println(result);
+        String result = stringEncryptor.encrypt("1qaz2wsx");
+        System.out.println("password = " + result);
 
         return "hello";
     }

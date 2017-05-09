@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class HomeController {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     @RequestMapping("/")
     public String index(Model model){
@@ -23,7 +25,6 @@ public class HomeController {
         return "home";
     }
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RequestMapping("/login")
     public String login(){

@@ -3,23 +3,18 @@ package com.ziniu.controller;
 
 
 import com.ziniu.controller.commons.CommonsProperties;
-import com.ziniu.domain.ZnUserBase;
 import com.ziniu.service.Impl.HelloServcice;
-import com.ziniu.service.Impl.ZnUserBaseService;
-import com.ziniu.service.Interface.IUserService;
 import com.ziniu.service.jms.queue.MessageSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 /**
  * Created by hzqiuxm on 2016/12/21 0021.
@@ -38,10 +33,6 @@ public class Ch002 {
     private CommonsProperties commonsProperties;
     @Autowired
     private HelloServcice helloServcice;
-    @Autowired
-    private ZnUserBaseService znUserBaseService;
-    @Autowired
-    private IUserService iUserService;
     @Autowired
     MessageSender messageSender;
 
@@ -84,38 +75,38 @@ public class Ch002 {
 
     }
 
-    @RequestMapping(value = "/getuser",method = RequestMethod.GET)
-    @ResponseBody
-    public String getUserInfo(@RequestParam("name") String name){
-        System.out.println("name = " + name);
-        ZnUserBase znUserBase = new ZnUserBase();
-        znUserBase.setUserName(name);
-
-        znUserBase = iUserService.getUserByCondition(znUserBase);
-        return znUserBase.getEmail();
-//          return "ok";
-    }
-
-    @RequestMapping(value = "/getname",method = RequestMethod.GET)
-    @ResponseBody
-    public String getname(@RequestParam("id") long id){
-
-        System.out.println("--------id = " + id);
-        ZnUserBase znUserBase = new ZnUserBase();
-        znUserBase = iUserService.getUserById((int) id);
-        return znUserBase.getNickName();
-    }
-
-    @RequestMapping(value = "/adduser",method = RequestMethod.GET)
-    public void addUserInfo(){
-
-        ZnUserBase znUserBase = new ZnUserBase();
-        znUserBase.setEmail("haoshijin@ziniuxiaozhu.com");
-        znUserBase.setUserName("youman");
-        znUserBase.setNickName("好事近");
-
-        znUserBaseService.insert(znUserBase);
-    }
+//    @RequestMapping(value = "/getuser",method = RequestMethod.GET)
+//    @ResponseBody
+//    public String getUserInfo(@RequestParam("name") String name){
+//        System.out.println("name = " + name);
+//        ZnUserBase znUserBase = new ZnUserBase();
+//        znUserBase.setUserName(name);
+//
+//        znUserBase = iUserService.getUserByCondition(znUserBase);
+//        return znUserBase.getEmail();
+////          return "ok";
+//    }
+//
+//    @RequestMapping(value = "/getname",method = RequestMethod.GET)
+//    @ResponseBody
+//    public String getname(@RequestParam("id") long id){
+//
+//        System.out.println("--------id = " + id);
+//        ZnUserBase znUserBase = new ZnUserBase();
+//        znUserBase = iUserService.getUserById((int) id);
+//        return znUserBase.getNickName();
+//    }
+//
+//    @RequestMapping(value = "/adduser",method = RequestMethod.GET)
+//    public void addUserInfo(){
+//
+//        ZnUserBase znUserBase = new ZnUserBase();
+//        znUserBase.setEmail("haoshijin@ziniuxiaozhu.com");
+//        znUserBase.setUserName("youman");
+//        znUserBase.setNickName("好事近");
+//
+//        znUserBaseService.insert(znUserBase);
+//    }
 
     @RequestMapping(value = "/showPerson",method = RequestMethod.GET)
     @Validated

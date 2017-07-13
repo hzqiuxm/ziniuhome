@@ -3,17 +3,18 @@ package com.ziniu.controller;
 
 
 import com.ziniu.controller.commons.CommonsProperties;
-import com.ziniu.domain.ZnUserBase;
 import com.ziniu.service.Impl.HelloServcice;
-import com.ziniu.service.Impl.ZnUserBaseService;
+import com.ziniu.service.jms.queue.MessageSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.annotation.security.RolesAllowed;
+import javax.validation.constraints.Size;
 
 /**
  * Created by hzqiuxm on 2016/12/21 0021.
@@ -33,13 +34,16 @@ public class Ch002 {
     @Autowired
     private HelloServcice helloServcice;
     @Autowired
-    private ZnUserBaseService znUserBaseService;
+    MessageSender messageSender;
 
+    @RolesAllowed("ROLE_ADMIN")
     @RequestMapping("/qiuxm")
     String index() {
 
-        return "book name is " + bookName + " and book author is " + bookAuthor + helloServcice.sayHello()
-                + " ziniu properties :" + commonsProperties.getYinyoushiren();
+        System.out.println("-------");
+        return "book name is " + bookName + " and book222333 author is " + bookAuthor + helloServcice.sayHello()
+                + " ziniu's properties :" + commonsProperties.getYinyoushiren()
+                + commonsProperties.getDefaultjms() + commonsProperties.getGoldjms();
     }
 
     //spring Boot默认使用的json解析框架是jackson
@@ -57,31 +61,59 @@ public class Ch002 {
 
     }
 
-    @RequestMapping(value = "/getuser",method = RequestMethod.GET)
-    @ResponseBody
-    public String getUserInfo(@RequestParam("name") String name){
-        System.out.println("name = " + name);
-        List<ZnUserBase> znUserBases;
-        znUserBases = znUserBaseService.getUser(name);
-        return znUserBases.get(0).getNickName();
+    @RequestMapping("/sendMsg/{typeId}")
+    String sendMsg(@PathVariable("typeId") int typeId){
+
+        String message = "我是一条测试消息";
+        if(1==typeId){
+            message = "我是一条很重要的消息!";
+        }
+        messageSender.sendMessage(message,typeId);
+
+        return "消息发送成功!消息类型是：" + typeId;
+
+
     }
 
-    @RequestMapping(value = "/adduser",method = RequestMethod.GET)
-    public void addUserInfo(){
-
-        ZnUserBase znUserBase = new ZnUserBase();
-        znUserBase.setEmail("haoshijin@ziniuxiaozhu.com");
-        znUserBase.setUserName("youman");
-        znUserBase.setNickName("好事近");
-
-        znUserBaseService.insert(znUserBase);
-    }
+//    @RequestMapping(value = "/getuser",method = RequestMethod.GET)
+//    @ResponseBody
+//    public String getUserInfo(@RequestParam("name") String name){
+//        System.out.println("name = " + name);
+//        ZnUserBase znUserBase = new ZnUserBase();
+//        znUserBase.setUserName(name);
+//
+//        znUserBase = iUserService.getUserByCondition(znUserBase);
+//        return znUserBase.getEmail();
+////          return "ok";
+//    }
+//
+//    @RequestMapping(value = "/getname",method = RequestMethod.GET)
+//    @ResponseBody
+//    public String getname(@RequestParam("id") long id){
+//
+//        System.out.println("--------id = " + id);
+//        ZnUserBase znUserBase = new ZnUserBase();
+//        znUserBase = iUserService.getUserById((int) id);
+//        return znUserBase.getNickName();
+//    }
+//
+//    @RequestMapping(value = "/adduser",method = RequestMethod.GET)
+//    public void addUserInfo(){
+//
+//        ZnUserBase znUserBase = new ZnUserBase();
+//        znUserBase.setEmail("haoshijin@ziniuxiaozhu.com");
+//        znUserBase.setUserName("youman");
+//        znUserBase.setNickName("好事近");
+//
+//        znUserBaseService.insert(znUserBase);
+//    }
 
     @RequestMapping(value = "/showPerson",method = RequestMethod.GET)
-    public String showPerson(@RequestParam("spId") long spId){
+    @Validated
+    public String showPerson(@RequestParam("spId") @Size() long spId){
 
         System.out.println("The spId is : " +spId);
-        if(100l == spId){
+        if(100L == spId){
             System.out.println("That's my number!");
         }
 
@@ -94,6 +126,16 @@ public class Ch002 {
         System.out.println("The query param is : " +spId);
 
         return "query"+spId;
+    }
+
+    @RequestMapping(value = "/getec",method = RequestMethod.GET)
+    public String getec(){
+
+        System.out.println("getec()..............");
+        int a;
+        a = 1/0;
+        return "Exception Test!";
+
     }
 
 

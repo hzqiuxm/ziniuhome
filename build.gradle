@@ -1,12 +1,13 @@
 allprojects{
     group = 'org.znxz'
     version = '1.0'
+
 }
 
 buildscript {
 
     ext {
-        springBootVersion = '1.5.1.RELEASE'
+        springBootVersion = '1.5.2.RELEASE'
         springloadedVersion = '1.2.6.RELEASE'
     }
 
@@ -16,11 +17,18 @@ buildscript {
             name  'znxz Maven Repository'
             url 'http://www.ziniuxiaozhu.com:8081/nexus/content/groups/public/'
         }
+
+        maven{
+            name  'ali Maven epository'
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+
         mavenCentral()
         jcenter()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        //热部署解决方案之springloaded
         classpath ("org.springframework:springloaded:${springloadedVersion}")
     }
 }
@@ -46,11 +54,13 @@ subprojects{
 //        slf4jVersion = '1.7.7'
 //    }
 
-//    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
-//    springBoot {
-//        mainClass = "com.controller.AppConfiguration"
-//    }
+
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+    springBoot {
+        mainClass = "com.ziniu.Application"
+    }
 
     repositories {
         mavenLocal()
@@ -62,23 +72,67 @@ subprojects{
         jcenter()
     }
 
+    // JVM 版本号要求
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
     dependencies {
 
 //        compile project(':web')
 //        spring boot
+
+        /*# ===================================================================
+        # SPRING BOOT STARTER
+        #
+        # 注意：优先推荐通过SpringBootStarter配置，这样可以自动处理依赖以及精简依赖项
+        #
+        # ===================================================================*/
+        //WEB服务
         compile("org.springframework.boot:spring-boot-starter-web")
-        // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
-//        compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '1.5.1.RELEASE'
+        //JPA服务
+        compile("org.springframework.boot:spring-boot-starter-data-jpa")
+        //热部署解决方案devtools工具
+//        compile("org.springframework.boot:spring-boot-devtools")
+        //mybatis服务
         compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '1.2.0'
-        testCompile("org.springframework.boot:spring-boot-starter-test")
-//        compile group: 'org.mybatis', name: 'mybatis', version: '3.4.2'
-//        compile group: 'org.mybatis', name: 'mybatis-spring', version: '1.3.1'
+        //表现层模板配置
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
+        //Security配置
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
+        //消息中间件MQ
+        compile ('org.springframework.boot:spring-boot-starter-activemq')
+        //WEB容器配置
+//        compile("org.springframework.boot:spring-boot-starter-jetty")
+
+        /*# ===================================================================
+        # SPRING BOOT GRADLE 普通配置类
+        #
+        # 只有单个依赖，当然默认的传递依赖仍然存在
+        #
+        # ===================================================================*/
+
+        //<!-- MYSQL 驱动 -->
+        compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.38'
+        //<!--支持 Druid 数据库连接池 -->
+        compile group: 'com.alibaba', name: 'druid', version: '1.0.18'
+        //<!--数据库连接池-->
+        compile group: 'c3p0', name: 'c3p0', version: '0.9.1.2'
+        //Guava工具类库
         compile group: 'com.google.guava', name: 'guava', version: '21.0'
-// https://mvnrepository.com/artifact/org.grails/gorm-hibernate5-spring-boot
+        //GORM持久化
 //        compile group: 'org.grails', name: 'gorm-hibernate5-spring-boot', version: '6.0.7.RELEASE'
-// https://mvnrepository.com/artifact/org.codehaus.groovy/groovy
+        //Groovy配置
         compile group: 'org.codehaus.groovy', name: 'groovy', version: '2.4.9'
+        //Encrypt配置文件密码加密
+        compile group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot', version: '1.12'
+        //thymeleaf模板引入sercurity标签配置
+        compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.2.RELEASE'
+        //Gson配置
+        compile group: 'com.google.code.gson', name: 'gson', version: '2.8.0'
+        //JDK加密算法封装
+        compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.56'
+        //JWT的token生成与验证
+        compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
 
         // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
 //        compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.8.Final'
@@ -102,12 +156,7 @@ subprojects{
 //        compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.21'
 //        //<!-- ehcache-core 核心文件 使用格式需要配置ehcache.xml-->
 //        compile group: 'net.sf.ehcache', name: 'ehcache-core', version: '2.6.11'
-        //<!-- MYSQL 驱动 -->
-        compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.38'
-//        //<!--支持 Druid 数据库连接池 -->
-        compile group: 'com.alibaba', name: 'druid', version: '1.0.18'
-//        //<!--数据库连接池-->
-        compile group: 'c3p0', name: 'c3p0', version: '0.9.1.2'
+
 //        //支持业务层 AOP
 //        compile group: 'cglib', name: 'cglib-nodep', version: '3.2.2'
 //        //<!-- json解析 Gson json-simple等-->
@@ -144,16 +193,22 @@ subprojects{
 //        //jstl模板解析相关，只在紫牛小组老版本过渡时期使用
 //        compile group: 'javax.servlet', name: 'jstl', version: '1.2'
 
+        /*# ===================================================================
+        # SPRING BOOT 测试类配置
+        #
+        # 注意：优先通过SpringBootStarter配置，这样可以自动处理依赖以及精简依赖项
+        #
+        # ===================================================================*/
 
-        //单元测试
-//        testCompile group: 'junit', name: 'junit', version: '4.12'
-//        testCompile('org.springframework.boot:spring-boot-starter-test')
-//        testCompile('org.springframework.boot:spring-boot-starter-test')
-        // https://mvnrepository.com/artifact/de.ruedigermoeller/fst
-//        compile group: 'de.ruedigermoeller', name: 'fst', version: '2.45'
-
+        //单元测试配置
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+//        compile group: 'de.ruedigermoeller' , name: 'fst', version: '2.45'
 
     }
+
+//    jar {
+//        baseName = "znxz"
+//    }
 }
 
 

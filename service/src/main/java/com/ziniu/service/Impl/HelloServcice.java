@@ -4,11 +4,12 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.crypto.MacProvider;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -20,8 +21,11 @@ import java.util.Date;
 @Service
 public class HelloServcice {
 
+    Logger log = Logger.getLogger("HelloServcice");
+
     public String sayHello(){
 
+        log.log(Level.INFO,()->" log is info");
         return " hello";
     }
 
@@ -35,6 +39,8 @@ public class HelloServcice {
                 .compact();
 
         System.out.println("compactJws: " + compactJws);
+
+        MacProvider.generateKey();
 
 
     }

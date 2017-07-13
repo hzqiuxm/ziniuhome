@@ -17,7 +17,7 @@ import java.util.Collection;
 /**
  * Copyright © 2016年 author. All rights reserved.
  *
- * @Author 临江仙 hxqiuxm@163.com
+ * @Author 临江仙 hzqiuxm@163.com
  * @Date 2017/5/8 0008 21:17
  * AuthenticationProvider 提供用户UserDetails的具体验证方式，在这里可以自定义用户密码的加密、验证方式等等。
  */
@@ -35,9 +35,8 @@ public class ZnAuthenticationProvider implements AuthenticationProvider {
 
         String userName = authentication.getName();
         String password = (String)authentication.getCredentials();
-        String what = (String)authentication.getPrincipal();
 
-        log.error("userName = " + userName + " password = " + password + what);
+        log.error("userName = " + userName + " password = " + password);
         UmUserBase userDetails = (UmUserBase)userService.loadUserByUsername(userName);
         if(userDetails==null){
             log.error("userDetails is null! userName not found");

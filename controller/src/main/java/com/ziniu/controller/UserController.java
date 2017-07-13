@@ -3,6 +3,9 @@ package com.ziniu.controller;
 
 import com.ziniu.domain.UmUserBase;
 import com.ziniu.service.Interface.IUmUserBaseService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +21,7 @@ import java.util.Date;
  * @Author 临江仙 hxqiuxm@163.com
  * @Date 2017/4/21 0021 10:10
  */
+@Api(description = "用户相关操作接口")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -25,7 +29,8 @@ public class UserController {
     @Autowired
     private IUmUserBaseService iUmUserBaseService;
 
-    @RequestMapping("add")
+    @ApiOperation(value = "增加用户信息",notes = "这里是notes")
+    @RequestMapping(value = "add",method = RequestMethod.POST)
     public String saveUserInfo(){
 
         System.out.println("-----------------");

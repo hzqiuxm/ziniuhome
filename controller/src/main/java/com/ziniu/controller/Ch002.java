@@ -5,6 +5,10 @@ package com.ziniu.controller;
 import com.ziniu.controller.commons.CommonsProperties;
 import com.ziniu.service.Impl.HelloServcice;
 import com.ziniu.service.jms.queue.MessageSender;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +23,7 @@ import javax.validation.constraints.Size;
 /**
  * Created by hzqiuxm on 2016/12/21 0021.
  */
+@Api(description = "这是一个测试类接口，没有什么卵用")
 @RestController //等价于@Controller和RequestBody
 @SpringBootApplication() //开启组件扫描和自动配置
 @EnableAutoConfiguration
@@ -36,8 +41,9 @@ public class Ch002 {
     @Autowired
     MessageSender messageSender;
 
+    @ApiOperation(value="获取一些配置文件中的属性值", notes="我是notes!")
     @RolesAllowed("ROLE_ADMIN")
-    @RequestMapping("/qiuxm")
+    @RequestMapping(value = "/qiuxm",method = RequestMethod.GET)
     String index() {
 
         System.out.println("-------");
@@ -47,7 +53,7 @@ public class Ch002 {
     }
 
     //spring Boot默认使用的json解析框架是jackson
-    @RequestMapping("/getContact")
+    @RequestMapping(value = "/getContact",method = RequestMethod.GET)
     Contact getPerson(){
         Contact contact = new Contact();
 
@@ -61,9 +67,12 @@ public class Ch002 {
 
     }
 
-    @RequestMapping("/sendMsg/{typeId}")
+    @ApiOperation(value = "这是一个测试MQ消息的发送接口",notes = "notes这次提醒你，这个接口是有参数的")
+    @ApiImplicitParam(name = "typeId",value = "消息类型，只有1是紧急消息",dataType = "int",paramType = "path")
+    @RequestMapping(value = "/sendMsg/{typeId}",method = RequestMethod.PUT)
     String sendMsg(@PathVariable("typeId") int typeId){
 
+//        int itypeId = Integer.valueOf(typeId);
         String message = "我是一条测试消息";
         if(1==typeId){
             message = "我是一条很重要的消息!";
@@ -108,6 +117,7 @@ public class Ch002 {
 //        znUserBaseService.insert(znUserBase);
 //    }
 
+    @ApiImplicitParam(name = "spId",value = "要查询的spId，100才是正确的",dataType = "long",paramType = "query")
     @RequestMapping(value = "/showPerson",method = RequestMethod.GET)
     @Validated
     public String showPerson(@RequestParam("spId") @Size() long spId){
@@ -120,7 +130,7 @@ public class Ch002 {
         return "hello"+spId;
     }
 
-    @RequestMapping(value = "/queryPerson/{spId}",method = RequestMethod.GET)
+    @RequestMapping(value = "/queryPerson/{spId}",method = RequestMethod.PUT)
     public String queryPerson(@PathVariable("spId") long spId){ //"spId"和参数spId同名时其实可以省略
 
         System.out.println("The query param is : " +spId);

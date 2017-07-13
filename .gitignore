@@ -10,4 +10,4 @@ out/
 service/build/
 service/src/main/resources/
 web/build/
-web/src/main/java/com/ziniu/config/
+#web/src/main/java/com/ziniu/config/

@@ -97,12 +97,15 @@ subprojects{
         compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '1.2.0'
         //表现层模板配置
         compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
-        //Security配置
+        //SpringSecurity配置
         compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
         //消息中间件MQ
         compile ('org.springframework.boot:spring-boot-starter-activemq')
         //WEB容器配置
 //        compile("org.springframework.boot:spring-boot-starter-jetty")
+
+        //redis数据库配置
+        compile('org.springframework.boot:spring-boot-starter-data-redis')
 
         /*# ===================================================================
         # SPRING BOOT GRADLE 普通配置类

@@ -3,7 +3,6 @@ package com.ziniu.service.Impl;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.crypto.MacProvider;
-import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -32,6 +31,10 @@ public class HelloServcice {
     public static void main(String[] args) {
 
         Key key = MacProvider.generateKey();
+
+        System.out.println("key: " + key);
+
+
         String compactJws = Jwts.builder().setSubject("hzqiuxm")
                 .signWith(SignatureAlgorithm.HS512, key)
                 .setExpiration(new Date(System.currentTimeMillis()+300000))
@@ -40,7 +43,9 @@ public class HelloServcice {
 
         System.out.println("compactJws: " + compactJws);
 
-        MacProvider.generateKey();
+//        MacProvider.generateKey();
+        if(Jwts.parser().setSigningKey(key).parseClaimsJws(compactJws).getBody().getSubject().equals("hzqiuxm"))
+            System.out.println("is ok!");
 
 
     }
@@ -56,7 +61,6 @@ public class HelloServcice {
 //    }
 
 
-    @Test
     public final void testJws(){
 
         Key key = MacProvider.generateKey();

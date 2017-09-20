@@ -44,35 +44,48 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{//1
 //	}
 
 
-
+	/**
+	 * 认证信息管理
+	 * @param auth
+	 * @throws Exception
+	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //		auth.userDetailsService(customUserService());//自动验证
 		auth.authenticationProvider(znAuthenticationProvider());//自定义认证
+//		auth.inMemoryAuthentication()
+//				.withUser("qiuxm").password("123456").roles("admin"); //认证信息存储在内存中
 
 
 
 	}
 
 
-
+	/**
+	 * 安全认证配置
+	 * @param http
+	 * @throws Exception
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-						.antMatchers("/app/commons/**","/img/**","/qiuxm/**","/durid/**").permitAll()
+						.antMatchers("/app/commons/**","/img/**","/qiuxm/**","/durid/**","/**").permitAll()
 						.anyRequest().authenticated() //4
 						.and()
-						.formLogin()
-							.loginPage("/login")
+						.formLogin()  //基于Form表单登录验证
+							.loginPage("/login") //自定义登录页面
 							.failureUrl("/login?error")
 							.permitAll() //5
 						.and()
 						.logout().permitAll(); //6
+		http.headers().frameOptions().disable();
 
 		//使用的是JWT，我们这里不需要csrf
 		http.csrf().disable().sessionManagement();
 
 	}
+
+
 
 
 

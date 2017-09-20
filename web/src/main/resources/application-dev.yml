@@ -41,7 +41,7 @@ spring:
         tomcat:
           connection-properties: druid.stat.mergeSql=true;druid.stat.showSqlMills=5000
 
-
+    #jpa
     jpa:
       database: mysql
       show-sql: true
@@ -51,11 +51,24 @@ spring:
           strategy: org.hibernate.cfg.DefaultComponentSafeNamingStrategy
     jackson:
       serialization: true
+    #thymeleaf
     thymeleaf:
       cache: false
+    #activemq
     activemq:
       broker-url: failover:tcp://192.168.10.55:61616
       in-memory: false
+    #redis
+    redis:
+      database: 0
+      host: 139.224.42.42
+      password: admin
+      pool:
+        max-active: 8
+        min-idle: 0
+        max-wait: -1
+        max-idle: 8
+      port: 6379
 
 
 #prefix 默认是在classpath:/templates/下

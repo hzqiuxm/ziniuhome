@@ -3,6 +3,7 @@ package com.ziniu.controller;
 import com.ziniu.domain.PersonDemo;
 import com.ziniu.repository.PersonRedisDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,5 +29,11 @@ public class DataControllerForRedis {
 	@RequestMapping("/getPerson") //3
 	public PersonDemo getPerson(){
 		return personRedisDao.getPerson();
+	}
+
+	@GetMapping("/getth")
+	public String getSomeThings(){
+
+		return (String) personRedisDao.getsomething();
 	}
 }

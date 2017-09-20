@@ -2,6 +2,7 @@ package com.ziniu.repository;
 
 import com.ziniu.domain.PersonDemo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -31,6 +32,9 @@ public class PersonRedisDao {
     @Resource(name="redisTemplate")
     ValueOperations<Object,Object> valOps;
 
+    @Resource(name="redisTemplate")
+    HashOperations<Object,Object,Object> hashOps;
+
     public void stringRedisTemplateDemo(){
         valueOpsStr.set("xx","yy");
     }
@@ -45,6 +49,20 @@ public class PersonRedisDao {
 
     public PersonDemo getPerson(){
         return (PersonDemo) valOps.get("1");
+    }
+
+    public Object getsomething(){
+        System.out.println("getsomething.....");
+
+        redisTemplate.opsForHash().put("test:1:base","name","dingjiahong");
+
+        Object name = hashOps.get("test:1:base", "name");
+        System.out.println("name = " + name);
+
+        Object cellNum = redisTemplate.opsForHash().get("user:1:base", "cellNum");
+        System.out.println("cellNum = " + cellNum);
+
+        return name.toString();
     }
 
 }

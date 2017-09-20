@@ -40,7 +40,6 @@ public class Application {
     }
 
     @Bean
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory)
             throws UnknownHostException {
         RedisTemplate<Object, Object> template = new RedisTemplate<Object, Object>();
@@ -52,8 +51,10 @@ public class Application {
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(om);
 
-        template.setValueSerializer(jackson2JsonRedisSerializer); //1 值采用jackson2JsonRedisSerializer序列化
-        template.setKeySerializer(new StringRedisSerializer()); //2 键采用StringRedisSerializer序列化
+        template.setValueSerializer(jackson2JsonRedisSerializer); //值采用jackson2JsonRedisSerializer序列化
+        template.setKeySerializer(new StringRedisSerializer()); // 键采用StringRedisSerializer序列化
+        template.setHashKeySerializer(jackson2JsonRedisSerializer);
+        template.setHashValueSerializer(jackson2JsonRedisSerializer);
 
         template.afterPropertiesSet();
         return template;

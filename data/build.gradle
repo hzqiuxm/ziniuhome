@@ -1,0 +1,8 @@
+project(':data'){
+
+}
+dependencies{
+    compile project(':common')
+    //redis数据库配置
+    compile("org.springframework.boot:spring-boot-starter-data-redis:${springBootVersion}")
+}

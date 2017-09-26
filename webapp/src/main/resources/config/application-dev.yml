@@ -13,6 +13,11 @@ spring:
         max-wait: -1
         max-idle: 8
       port: 6379
+    data:
+    # MongoDB配置
+      mongodb:
+        host: 139.224.42.42
+
 
 #日志配置
 logging:

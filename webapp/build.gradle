@@ -5,6 +5,7 @@ project(':webapp'){
 
 buildscript {
     repositories {
+        maven{url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         jcenter()
     }
 
@@ -14,12 +15,23 @@ buildscript {
         classpath ("org.springframework:springloaded:${springloadedVersion}")
     }
 }
-
+/*# ===================================================================
+    # SPRING BOOT STARTER
+    #
+    # 注意：优先推荐通过SpringBootStarter配置，这样可以自动处理依赖以及精简依赖项
+    #
+    # ===================================================================*/
 dependencies {
     compile project(':control')
     //WEB容器配置
     providedCompile("org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}")
     //providedCompile("org.springframework.boot:spring-boot-starter-jetty")
+
+    //WEB服务
+    compile("org.springframework.boot:spring-boot-starter-web")
+
+    //SpringSecurity配置
+    compile('org.springframework.boot:spring-boot-starter-security')
 }
 
 jar {

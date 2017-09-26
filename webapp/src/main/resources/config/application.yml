@@ -1,0 +1,25 @@
+spring:
+    profiles:
+        active: dev
+    application:
+        #指定Application.main入口类
+        name : Application
+    #默认使用模板
+    thymeleaf:
+      #配置支持H5页面
+      mode : LEGACYHTML5
+      #在不重启容器的情况下重新加载Thymeleaf模板，即热刷新
+      cache : false
+      encoding : UTF-8
+    #设置网站小图标facicon 自定义的图标可以放在根目录，类路径resource下，类路径static路径下
+    mvc:
+      favicon:
+        enabled: false
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%level] [%class:%line] - %m %n"
+debug: false
+
+
+
+

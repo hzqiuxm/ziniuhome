@@ -1,0 +1,21 @@
+#生产环境的配置
+spring:
+    application:
+        name: prod
+
+
+server:
+  port: 8080
+  context-path: /
+  session:
+    #用户会话过期时间，单位秒
+    timeout: 60
+  tomcat:
+    #Tomcat编码,默认就是UTF-8
+    uri-encoding: UTF-8
+#server.port=8443
+# SSL协议相关配置
+#server.ssl.key-store= .keystore
+#server.ssl.key-password= 123321
+#server.ssl.key-store-type= JKS
+#server.ssl.key-alias= tomcat

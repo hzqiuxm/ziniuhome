@@ -1,0 +1,36 @@
+#开发环境的配置
+spring:
+    application:
+        name: dev
+    #redis
+    redis:
+      database: 0
+      host: 139.224.42.42
+      password: admin
+      pool:
+        max-active: 8
+        min-idle: 0
+        max-wait: -1
+        max-idle: 8
+      port: 6379
+
+#日志配置
+logging:
+  file: D:/springboot.log
+  level:
+     com.ziniu.webapp : debug
+     com.ziniu.control : debug
+
+jasypt:
+  encryptor:
+    password: ziniu
+
+server:
+  port: 8080
+  context-path: /
+#server.port=8443
+# SSL协议相关配置
+#server.ssl.key-store= .keystore
+#server.ssl.key-password= 123321
+#server.ssl.key-store-type= JKS
+#server.ssl.key-alias= tomcat

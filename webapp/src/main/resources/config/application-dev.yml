@@ -17,7 +17,8 @@ spring:
     # MongoDB配置
       mongodb:
         host: 139.224.42.42
-
+        port: 27017
+        database: znxz
 
 #日志配置
 logging:

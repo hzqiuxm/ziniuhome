@@ -1,7 +1,9 @@
 package com.ziniu.control;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+import com.ziniu.data.entity.Res;
 import com.ziniu.data.entity.Test;
+import com.ziniu.data.repository.ResRepository;
 import com.ziniu.data.repository.TestRepository;
 import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +82,38 @@ public class TestController extends BaseController{
             System.out.println(t.toString());
         }
         return getSuccessResult(list);
+    }
+
+    @Autowired
+    private ResRepository resRepository;
+
+    @PostMapping("/addRes")
+    @ResponseBody
+    public ModelMap addRes(){
+        Res res = new Res();
+        res.setBucket("test-file");
+        res.setFileKey("test/file1");
+        res.setUrl("http://ovft3n4xt.bkt.clouddn.com/test/file1");
+        return getSuccessResult(resRepository.insert(res));
+    }
+
+    @GetMapping("/getReses")
+    @ResponseBody
+    public ModelMap getReses(){
+        List<Res> list = resRepository.findAll();
+        for (Res t : list){
+            System.out.println(t);
+            System.out.println(resRepository.findByFileKey(t.getFileKey()));
+        }
+        return getSuccessResult(list);
+    }
+
+    @GetMapping("/getResByFileKey")
+    @ResponseBody
+    public ModelMap getResByFileKey(String fileKey){
+        Res res = resRepository.findByFileKey(fileKey);//这个可以
+        System.out.println(res);
+        return getSuccessResult(res);
     }
 
 }

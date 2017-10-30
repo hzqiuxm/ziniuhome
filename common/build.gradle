@@ -11,6 +11,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter:${springBootVersion}")
     //单元测试配置
     testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+    //七牛云SDK
+    compile("com.qiniu:qiniu-java-sdk:7.2.8")
 
 
     //Encrypt配置文件密码加密

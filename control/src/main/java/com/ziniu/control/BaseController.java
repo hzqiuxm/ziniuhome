@@ -13,6 +13,24 @@ public class BaseController {
     public static final String DATA = "data";
     public static final String MSG = "msg";
 
+    /**
+     * 获取当前用户的登录名
+     * @return
+     */
+    String getLoginName(){
+        String loginName = "haosj";//测试用，等圣无忧实现
+        return loginName;
+    }
+
+    /**
+     * 获取当前用户的显示名称
+     * @return
+     */
+    String getShowName(){
+        String showName = "好事近";//测试用，等圣无忧实现
+        return showName;
+    }
+
     ModelMap getSuccessResult(){
         ModelMap modelMap = new ModelMap();
         modelMap.put(SUCCESS, true);

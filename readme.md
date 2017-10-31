@@ -22,7 +22,7 @@ User {
     "rank" : String(16) //职级(段位)
     "roles" : List<String> //角色列表
     "jc" : Integer //节操
-    "avatar" : {
+    "avatar" : Res {
             "bucket" : String(32) //储存空间
             "fileKey" : String(64) //文件key
             "url" : String(128) //外连URL
@@ -63,7 +63,7 @@ JcRec {
 - *课程相关信息，包括课程资源信息。*
 ```
 Course {
-    "id" : Long(11) //主键ID
+    "id" : ObjectId //主键ID
     "title" : String(32) //主题
     "descrip" : String(128) //课程介绍
     "lecturer" : String(32) //讲师的loginName
@@ -81,27 +81,26 @@ Course {
                 "gmtSignup" : Date //报名时间
             }
         ]
-    "cover" : Cover { //封面图片
+    "cover" : Res { //封面图片
             "bucket" : String(32) //储存空间
             "fileKey" : String(64) //文件key
             "url" : String(128) //外连URL
-            "fsize" : Integer //文件大小，单位为B字节
         }
-    "ppt" : Ppt { //演示文档
-            "bucket" : String(32) //储存空间
-            "fileKey" : String(64) //文件key
-            "url" : String(128) //外连URL
-            "fsize" : Integer //文件大小，单位为B字节
-            "downCnt" : Integer //下载次数
-        }
-    "speech" : Speech { //课程文稿
+    "ppt" : DownableRes { //演示文档
             "bucket" : String(32) //储存空间
             "fileKey" : String(64) //文件key
             "url" : String(128) //外连URL
             "fsize" : Integer //文件大小，单位为B字节
             "downCnt" : Integer //下载次数
         }
-    "audio" : Audio { //演讲音频
+    "speech" : DownableRes { //课程文稿
+            "bucket" : String(32) //储存空间
+            "fileKey" : String(64) //文件key
+            "url" : String(128) //外连URL
+            "fsize" : Integer //文件大小，单位为B字节
+            "downCnt" : Integer //下载次数
+        }
+    "audio" : PlayableRes { //演讲音频
             "bucket" : String(32) //储存空间
             "fileKey" : String(64) //文件key
             "url" : String(128) //外连URL
@@ -109,7 +108,7 @@ Course {
             "playCnt" : Integer //播放次数
             "downCnt" : Integer //下载次数
         }
-    "video" : Video { //演讲视频
+    "video" : PlayableRes { //演讲视频
             "bucket" : String(32) //储存空间
             "fileKey" : String(64) //文件key
             "url" : String(128) //外连URL
@@ -128,7 +127,7 @@ CourseCmt {
     "courseId" : Long(11) //课程ID
     "loginName" : String(32) //登录用户名
     "showName" : String(32) //显示的用户名称
-    "cmtPid" : Long(11) //回复的评论的ID
+    "cmtPid" : ObjectId //回复的评论的ID
     "likes" : List<String> [ //点赞的用户
             "loginName" : String(32) //登录用户名
         ]

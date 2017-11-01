@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <title>用户注册</title>
+    <style>
+        body { background-color: #f8f8f8;  font-family: "微软雅黑 Light";}
+        .title{ position: relative; left: 43%; top : 80px;}
+        table{position: relative; left: 39% ; top : 80px;}
+        .register{position: relative; left: 41% ; top : 80px;}
+        .res{position: relative; left: 43% ; top : 80px;}
+    </style>
+    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../js/userManager/register.js"></script>
+</head>
+<body>
+    <div>
+        <h2><span class="title">USER REGISTER</span></h2>
+        <form>
+            <table>
+                <tr>
+                    <td>showName</td>
+                    <td>：<input class="showName" type="text" ><span class="showNameInfo"></span></td>
+                </tr>
+                <tr>
+                    <td>cellNumber</td>
+                    <td>：<input class="cellNumber" type="text" ><span class="cellNumberInfo"></span></td>
+                </tr>
+                <tr>
+                    <td>age</td>
+                    <td>：<select class="age"></select></td>
+                </tr>
+                <tr>
+                    <td>sex</td>
+                    <td>：<select class="sex"></select></td>
+                </tr>
+                <tr>
+                    <td>rank</td>
+                    <td>：<select class="rank"></select></td>
+                </tr>
+                <tr>
+                    <td>loginName</td>
+                    <td>：<input class="loginName" type="text" ><span class="loginNameInfo"></span></td>
+                </tr>
+                <tr>
+                    <td>password</td>
+                    <td>：<input class="password" type="password" ><span class="passwordInfo"></span></td>
+                </tr>
+            </table>
+            <input class= "register"  type="button" value="register" onclick="addUser()">
+            <input class="res" type="reset" value="reset" onclick="clearPoint()">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,6 +1,8 @@
 package com.ziniu.control;
 
+import com.ziniu.data.entity.JwtUmUserBase;
 import com.ziziu.common.Const;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
 
 /**
@@ -18,7 +20,11 @@ public class BaseController {
      * @return
      */
     String getLoginName(){
-        String loginName = "haosj";//测试用，等圣无忧实现
+        JwtUmUserBase userDetails = (JwtUmUserBase) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(userDetails == null){
+            return "未登录";
+        }
+        String loginName = userDetails.getLoginName();//测试用，等圣无忧实现
         return loginName;
     }
 
@@ -27,7 +33,11 @@ public class BaseController {
      * @return
      */
     String getShowName(){
-        String showName = "好事近";//测试用，等圣无忧实现
+        JwtUmUserBase userDetails = (JwtUmUserBase) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(userDetails == null){
+            return "未登录";
+        }
+        String showName =userDetails.getShowName();//测试用，等圣无忧实现
         return showName;
     }
 

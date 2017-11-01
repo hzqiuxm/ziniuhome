@@ -10,7 +10,7 @@ project(':control'){
 dependencies{
     compile project(':service')
     //WEB服务
-    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    //compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
     //SpringSecurity配置
     //compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
 }

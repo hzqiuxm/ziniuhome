@@ -12,5 +12,5 @@ dependencies{
     //redis数据库配置
     compile("org.springframework.boot:spring-boot-starter-data-redis:${springBootVersion}")
     //mongodb数据库配置
-    compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
+    //compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
 }

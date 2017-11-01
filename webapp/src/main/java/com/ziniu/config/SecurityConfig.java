@@ -1,0 +1,92 @@
+package com.ziniu.config;
+
+import com.ziniu.security.MyAuthenticationProvider;
+import com.ziniu.security.jwtFilter.JwtAuthenticationTokenFilter;
+import com.ziniu.security.jwtFilter.JwtTokenUtil;
+import com.ziniu.service.impl.JwtUserService;
+import com.ziniu.service.interfaces.IJwtUserService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(jsr250Enabled = true) //http://www.mamicode.com/info-detail-1150834.html
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
+
+    @Bean
+    IJwtUserService jwtUserService(){
+        return new JwtUserService();
+    }
+
+    @Bean
+    MyAuthenticationProvider myAuthenticationProvider(){
+        return new MyAuthenticationProvider();
+    }
+
+    @Bean
+    public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter() throws Exception{
+        return new JwtAuthenticationTokenFilter();
+    }
+
+    @Bean
+    JwtTokenUtil jwtTokenUtil(){
+        return new JwtTokenUtil();
+    }
+    //自己定义一个manager
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //super.configure(auth);
+        // 调用自己定义的provider
+        auth.authenticationProvider(myAuthenticationProvider());
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+//                .antMatchers("/templates/**").permitAll()
+                .antMatchers("/course/**").permitAll()
+                .antMatchers("/login/view").permitAll()
+                .anyRequest().authenticated()
+             .and()
+                .formLogin()
+                    .loginPage("/login/view").permitAll()
+                    .loginProcessingUrl("/loginProcess")   //自定义的一个登陆验证地址，controller中没有对应的方法，只是为了login过滤
+                    .usernameParameter("loginName")
+                    .passwordParameter("password")
+                    .successForwardUrl("/login/success")    //这里要注意一点这个loginSuccess必须是POST方法  当然你也可以自己定义一个successhandler
+                    .failureForwardUrl("/login/failure")
+             .and()
+                .logout()
+                    .logoutUrl("/logout")
+                    .permitAll()
+             .and()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+             .and()
+                //使用的是JWT，我们这里不需要csrf
+                .addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http
+                .headers().cacheControl();
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        //因为boot 默认的静态资源位置就是在resource/static目录下面 ,这里我做一个测试
+        web.ignoring().antMatchers("/views/**",
+                                                "/register",
+                                                "/login/getToken",
+                                                "/**/*.ico",
+                                                "/**/*.jpg",
+                                                "/**/*.js",
+                                                "/**/*.css"
+        );
+    }
+}

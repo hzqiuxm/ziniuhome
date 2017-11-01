@@ -24,7 +24,8 @@ buildscript {
 dependencies {
     compile project(':control')
     //WEB容器配置
-    providedCompile("org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}")
+    //这里添加会导致版本冲突出现 （注释掉） Unable to start EmbeddedWebApplicationContext due to missing EmbeddedServletContainerFactory bean
+    //providedCompile("org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}")
     //providedCompile("org.springframework.boot:spring-boot-starter-jetty")
 
     //WEB服务

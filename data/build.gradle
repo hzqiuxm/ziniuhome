@@ -4,5 +4,5 @@ project(':data'){
 dependencies{
     compile project(':common')
     //mongodb数据库配置
-    compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
+    //compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
 }

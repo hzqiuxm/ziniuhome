@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <title>测试页面</title>
+    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" >
+        var token = localStorage.getItem("token");
+        function star(){
+            alert(token);
+        }
+
+    </script>
+    <style>
+        body {
+            margin: 0 1%;
+            background-color: #f8f8f8;
+            font-family: "微软雅黑 Light";
+        }
+    </style>
+</head>
+<body onload="star()">
+
+    <h2> START TEST 测试页面</h2>
+    <p>...<h3 sec:authentication="loginName"></h3> ...</p>
+    ${session.SPRING_SECURITY_CONTEXT.authentication.principal.loginName}
+    <h3 sec:authentication="loginName">用户 ：   </h3>
+    <span th:value="${session.loginName}">3</span>
+    <span th:text="session.principal"> "${session.loginName}"   5</span>
+</body>
+</html>

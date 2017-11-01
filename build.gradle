@@ -26,4 +26,30 @@ subprojects{
         mavenCentral()
         jcenter()
     }
+
+    dependencies{
+        //这里我是用tomcat容器提供servlet
+        compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '8.5.20'
+        compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+        compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+        //添加security依赖
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.2.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '1.5.3.RELEASE'
+        //thymeleaf使用3.0版本这样就不会出现html页面标签未结束报错的情况
+        compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.2.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.5.3.RELEASE'
+
+        //使用thymeleaf出现的标签库问题的解决方法
+        compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
+        //JSON 转换 ，默认的json不会用啊  https://mvnrepository.com/artifact/com.alibaba/fastjson
+        compile group: 'com.alibaba', name: 'fastjson', version: '1.1.15'
+        //<!--数据库连接池-->
+        // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: '1.2.5.RELEASE'
+        //JWT的token生成与验证
+        compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
+        //单元测试配置
+        testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.3.RELEASE'
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+    }
 }

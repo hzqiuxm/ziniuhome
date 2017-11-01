@@ -11,7 +11,7 @@ spring:
 
 #日志配置
 logging:
-  file: D:/springboot.log
+  file: F:/springboot.log
   level:
      com.ziniu.webapp : debug
      com.ziniu.control : debug
@@ -29,3 +29,15 @@ server:
 #server.ssl.key-password= 123321
 #server.ssl.key-store-type= JKS
 #server.ssl.key-alias= tomcat
+
+#JWT
+jwt:
+  header: "Authorization"
+  secret: mySecret
+  expiration: 604800
+  tokenHead: "Bearer"
+  route:
+    authentication:
+      path: auth
+      refresh: refresh
+      register: "auth/register"

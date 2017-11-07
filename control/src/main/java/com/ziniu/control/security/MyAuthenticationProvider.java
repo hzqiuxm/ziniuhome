@@ -1,4 +1,4 @@
-package com.ziniu.security;
+package com.ziniu.control.security;
 
 import com.ziniu.data.entity.JwtUmUserBase;
 import com.ziniu.service.interfaces.IJwtUserService;

@@ -67,10 +67,13 @@ function showUpdateBox(cid) {
         $(".ub-right-span").first().addClass("card-img-have");
     }else{
         $(".ub-right-span").first().css("background", 'url(/favicon.ico)no-repeat center');
+        $(".ub-right-span").first().removeClass("card-img-have");
     }
     $("#upTitle").val(courseList[cid].title);
     $("#upDescrip").val(courseList[cid].descrip);
     $("#upAudience").val(courseList[cid].audience);
+    ziniu.commons.setDateTimeBox(lectureDate, lectureTime, courseList[cid].gmtLecture)
+    $("#addr").val(courseList[cid].addr);
 }
 function closeBox(node) {
     pubBox.style.display = "none";
@@ -82,16 +85,18 @@ function updateCourse() {
     //如果信息没有修改就不用更新了
     if($("#upTitle").val() == courseList[upId].title
         && $("#upDescrip").val() == courseList[upId].descrip
-        && $("#upAudience").val() == courseList[upId].audience){
-        console.log("没有修改任务信息");
+        && $("#upAudience").val() == courseList[upId].audience
+        && ziniu.commons.dateTimeHandle(lectureDate.value, lectureTime.value) == courseList[upId].gmtLecture){
+        console.log("没有修改任何信息");
         window.location.reload();
         return;
     }
     $.ajax({
         type: "POST",
         url: "/course/update",
-        data: {"id":upId,"title":$("#upTitle").val(),"descrip":$("#upDescrip").val(),
-            "audience":$("#upAudience").val()},
+        data: {"id":upId,"title":$("#upTitle").val(),
+            "descrip":$("#upDescrip").val(),"audience":$("#upAudience").val(),
+            "gmtLecture":ziniu.commons.dateTimeHandle(lectureDate.value, lectureTime.value),"addr":addr.value},
         async: false,
         success: function (result) {
             if (!result.success){
@@ -109,7 +114,8 @@ function setStage(id) {
         case 1: return "审核中";
         case 2: return "已滞留";
         case 3:
-            return znxz.commons.dateFmt("yyyy-MM-dd hh:mm:ss", new Date(courseList[id].gmtLecture));
+            return ziniu.commons.dateFmt("yyyy-MM-dd hh:mm", new Date(courseList[id].gmtLecture))
+                + "<input type=\"button\" onclick=\"signup('"+id+"')\" value=\"报名\">";
         case 4: return "已闭课";
         case 5: return "进行中";
         case 6: return "已完成";
@@ -142,6 +148,21 @@ function uploadImg(id, title) {
         type: "POST",
         url: "/course/uploadCover",
         data: {"id": id,"title": title,"image": upImage},
+        async: false,
+        success: function (result) {
+            if(!result.success){
+                alert(result.msg);
+            }
+        },
+        dataType: "json"
+    });
+};
+function signup(id) {
+    console.log(id);
+    $.ajax({
+        type: "POST",
+        url: "/course/signup",
+        data: {"id": id},
         async: false,
         success: function (result) {
             if(!result.success){

@@ -1,23 +1,25 @@
 project(':common'){
 
-}
-dependencies {
-    /*# ===================================================================
-        # SPRING BOOT STARTER
-        #
-        # 注意：优先推荐通过SpringBootStarter配置，这样可以自动处理依赖以及精简依赖项
-        #
-        # ===================================================================*/
-    compile("org.springframework.boot:spring-boot-starter:${springBootVersion}")
-    //单元测试配置
-    testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
-    //七牛云SDK
-    compile("com.qiniu:qiniu-java-sdk:7.2.8")
+    dependencies {
+        /*# ===================================================================
+            # SPRING BOOT STARTER
+            #
+            # 注意：优先推荐通过SpringBootStarter配置，这样可以自动处理依赖以及精简依赖项
+            #
+            # ===================================================================*/
+        compile("org.springframework.boot:spring-boot-starter")
+        //单元测试配置
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        //七牛云SDK
+        compile("com.qiniu:qiniu-java-sdk:7.2.8")
+        //阿里的JSON
+        compile('com.alibaba:fastjson:1.1.15')
 
 
-    //Encrypt配置文件密码加密
-    compile("com.github.ulisesbocchio:jasypt-spring-boot-starter:1.15")
-    //API自动化生成
-    compile "io.springfox:springfox-swagger2:2.6.1"
-    compile "io.springfox:springfox-swagger-ui:2.6.1"
+        //Encrypt配置文件密码加密
+        compile("com.github.ulisesbocchio:jasypt-spring-boot-starter:1.15")
+        //API自动化生成
+        compile "io.springfox:springfox-swagger2:2.6.1"
+        compile "io.springfox:springfox-swagger-ui:2.6.1"
+    }
 }

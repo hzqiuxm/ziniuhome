@@ -1,11 +1,10 @@
 package com.ziniu.control;
 
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import com.ziniu.data.entity.JwtUmUserBase;
 import com.ziniu.data.repository.JwtUmUserBaseDao;
-import com.ziniu.security.jwtFilter.JwtTokenUtil;
+import com.ziniu.control.security.jwtFilter.JwtTokenUtil;
 import com.ziziu.common.HttpUrlConnection;
 import com.ziziu.common.constants.ZiniuEnum;
 import org.apache.log4j.Logger;

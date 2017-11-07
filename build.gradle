@@ -1,9 +1,4 @@
-allprojects{
-    group = 'org.znxz'
-    version = '1.0'
-}
-
-subprojects{
+buildscript{
     apply plugin: 'java'
     apply plugin: 'idea'
 
@@ -12,44 +7,57 @@ subprojects{
     targetCompatibility = 1.8
 
     ext {
-        springBootVersion = '1.5.7.RELEASE'
+        springBootVersion = '1.5.8.RELEASE'
         springloadedVersion = '1.2.8.RELEASE'
     }
 
     [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
     repositories {
-        maven{ url 'http://www.ziniuxiaozhu.com:8081/nexus/content/groups/public' }
-        maven { url "http://repo.spring.io/snapshot" }
-        maven { url "http://repo.spring.io/milestone" }
         mavenLocal()
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        maven{ url 'http://www.ziniuxiaozhu.com:8081/nexus/content/groups/public' }
         mavenCentral()
         jcenter()
     }
 
-    dependencies{
-        //这里我是用tomcat容器提供servlet
-        compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '8.5.20'
-        compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
-        compile group: 'javax.servlet', name: 'jstl', version: '1.2'
-        //添加security依赖
-        compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.2.RELEASE'
-        compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '1.5.3.RELEASE'
-        //thymeleaf使用3.0版本这样就不会出现html页面标签未结束报错的情况
-        compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.2.RELEASE'
-        compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.5.3.RELEASE'
-
-        //使用thymeleaf出现的标签库问题的解决方法
-        compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
-        //JSON 转换 ，默认的json不会用啊  https://mvnrepository.com/artifact/com.alibaba/fastjson
-        compile group: 'com.alibaba', name: 'fastjson', version: '1.1.15'
-        //<!--数据库连接池-->
-        // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb
-        compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: '1.2.5.RELEASE'
-        //JWT的token生成与验证
-        compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
-        //单元测试配置
-        testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.3.RELEASE'
-        testCompile group: 'junit', name: 'junit', version: '4.12'
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin")
+        /*这个是本地开发时用来支持热部署的，上开发/测试/生产环境时，建议注释掉，以免影响性能。*/
+        classpath ("org.springframework:springloaded:${springloadedVersion}")
     }
+}
+
+plugins{
+    id 'org.springframework.boot' version '1.5.8.RELEASE'
+}
+
+
+allprojects{
+    group = 'com.znxz'
+    version = '1.0'
+
+    apply plugin: 'org.springframework.boot'
+}
+
+subprojects{
+    repositories {
+        mavenLocal()
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        maven{ url 'http://www.ziniuxiaozhu.com:8081/nexus/content/groups/public' }
+        mavenCentral()
+        jcenter()
+    }
+}
+
+jar {
+    baseName = "znxz"
+}
+
+bootRun {
+    addResources = true
+    main = "com.ziniu.Application"
+}
+bootRepackage {
+    mainClass = "com.ziniu.Application"
 }

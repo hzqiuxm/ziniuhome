@@ -20,7 +20,7 @@ public class Course implements Serializable {
     protected String audience;
     protected Date gmtLecture;
     protected String addr;
-    protected Byte stage;
+    protected byte stage;
     protected String ruleCode;
     protected Res cover;
     protected Date gmtModify;
@@ -89,11 +89,11 @@ public class Course implements Serializable {
         this.addr = addr;
     }
 
-    public Byte getStage() {
+    public byte getStage() {
         return stage;
     }
 
-    public void setStage(Byte stage) {
+    public void setStage(byte stage) {
         this.stage = stage;
     }
 

@@ -2,15 +2,23 @@ package com.ziniu.control;
 
 import com.ziniu.control.form.CourseForm;
 import com.ziniu.data.entity.Course;
+import com.ziniu.data.entity.CourseSignup;
+import com.ziniu.data.entity.Signup;
 import com.ziniu.data.repository.CourseRepository;
 import com.ziniu.service.interfaces.ICourseService;
 import com.ziziu.common.Const;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
+ * 课程管理
  * Created by yeoman on 2017/10/26.
  */
 @RestController
@@ -28,7 +36,6 @@ public class CourseController extends BaseController {
      * @return
      */
     @PostMapping("/publish")
-    @ResponseBody
     public ModelMap publish(CourseForm form){
         if (null != form){
             if (StringUtils.isEmpty(form.getTitle()) || StringUtils.isEmpty(form.getDescrip())
@@ -49,27 +56,42 @@ public class CourseController extends BaseController {
         return getFailResult(Const.ReturnCode.F_201);
     }
 
+    /**
+     * 根据ID获取课程信息
+     * @param id
+     * @return
+     */
     @GetMapping("/getInfo/{id}")
-    @ResponseBody
     public ModelMap getInfo(@PathVariable String id){
         if (StringUtils.isEmpty(id)){
             return getFailResult(Const.ReturnCode.F_201, "参数错误");
         }
-        Course course = courseRepository.findById(id);
+        Course course = courseService.getCourse(id);
         if(null != course){
-            return getSuccessResult(courseService.setKey(course));
+            return getSuccessResult(courseService.setKey(course, course.getId().toString()));
         }
         return getFailResult(Const.ReturnCode.F_301,"未查到课程信息");
     }
 
+    /**
+     * 获取课程列表
+     * @return
+     */
+    @RolesAllowed({"ROLE_USER"})
     @GetMapping("/getList")
-    @ResponseBody
     public ModelMap getList(){
-        return getSuccessResult(courseService.setKeys(courseRepository.findAll()));
+        return getSuccessResult(courseService.setKeys(courseService
+                .getCourseListByLecturerOrStage(getLoginName(), Const.CourseStage.SIGNUP)));
     }
 
+    /**
+     * 更新封面
+     * @param id
+     * @param title
+     * @param image
+     * @return
+     */
     @PostMapping("/uploadCover")
-    @ResponseBody
     public ModelMap uploadCover(String id, String title, String image){
         if(StringUtils.isEmpty(id) || StringUtils.isEmpty(title) || StringUtils.isEmpty(image)){
             return getFailResult(Const.ReturnCode.F_201, "参数错误");
@@ -86,6 +108,69 @@ public class CourseController extends BaseController {
         if(courseService.uploadCover(id, image)){
             return getSuccessResult();
         }
+        return getFailResult(Const.ReturnCode.F_303, "系统保存失败");
+    }
+
+    /**
+     * 更新课程
+     * @param form
+     * @return
+     */
+    @PostMapping("/update")
+    public ModelMap update(CourseForm form) {
+        if (null != form) {
+            if (StringUtils.isEmpty(form.getId()) || StringUtils.isEmpty(form.getTitle())
+                    || StringUtils.isEmpty(form.getDescrip())
+                    || StringUtils.isEmpty(form.getAudience())) {
+                return getFailResult(Const.ReturnCode.F_201, "参数错误");
+            }
+            ObjectId objectId = new ObjectId(form.getId());
+            if(!courseRepository.exists(objectId)){
+                getFailResult(Const.ReturnCode.F_301,"未查到课程信息");
+            }
+            Course course = new Course();
+            course.setId(objectId);
+            course.setTitle(form.getTitle());
+            course.setDescrip(form.getDescrip());
+            course.setAudience(form.getAudience());
+            course.setGmtLecture(new Date(form.getGmtLecture()));
+            course.setAddr(form.getAddr());
+            if (courseService.updateOneByIdSelective(course))
+                return getSuccessResult();
+            return getFailResult(Const.ReturnCode.F_303, "系统保存失败");
+        }
+        return getFailResult(Const.ReturnCode.F_201);
+    }
+
+    /**
+     * 报名
+     * @param id
+     * @return
+     */
+    @PostMapping("/signup")
+    public ModelMap signup(String id) {
+        if (StringUtils.isEmpty(id)){
+            return getFailResult(Const.ReturnCode.F_201, "参数错误");
+        }
+        CourseSignup courseSignup = courseService.getCourseSignup(id);
+        if (null == courseSignup){
+            return getFailResult(Const.ReturnCode.F_301,"未查到课程信息");
+        }
+        String curLoginEmail = getLoginName();
+        if (courseSignup.getLecturer().equals(curLoginEmail) || courseSignup.getStage() != Const.CourseStage.SIGNUP){
+            return getFailResult(Const.ReturnCode.F_203,"不支持该操作");
+        }
+        ArrayList<Signup> signups = courseSignup.getSignups();
+        if (null != signups){
+            for (Signup su : signups){
+                if (su.getLoginName().equals(curLoginEmail)){
+                    return getFailResult(Const.ReturnCode.F_204, "你已报名，请直接参与。");
+                }
+            }
+        }
+
+        if (courseService.signup(courseSignup.getId(), signups, curLoginEmail, getShowName()))
+            return getSuccessResult();
         return getFailResult(Const.ReturnCode.F_303, "系统保存失败");
     }
 }

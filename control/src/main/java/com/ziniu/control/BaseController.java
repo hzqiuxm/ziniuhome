@@ -41,6 +41,12 @@ public class BaseController {
         return showName;
     }
 
+    boolean isAdmin(){
+        //等圣无忧实现
+        boolean isAdmin = true;
+        return isAdmin;
+    }
+
     ModelMap getSuccessResult(){
         ModelMap modelMap = new ModelMap();
         modelMap.put(SUCCESS, true);
@@ -52,6 +58,14 @@ public class BaseController {
     ModelMap getSuccessResult(Object data){
         ModelMap modelMap = getSuccessResult();
         modelMap.put(DATA, data);
+        return modelMap;
+    }
+
+    ModelMap getSuccessResult(int failCode, String msg){
+        ModelMap modelMap = new ModelMap();
+        modelMap.put(SUCCESS, true);
+        modelMap.put(CODE, failCode);
+        modelMap.put(MSG, msg);
         return modelMap;
     }
 

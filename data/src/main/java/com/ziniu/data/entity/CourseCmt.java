@@ -2,6 +2,7 @@ package com.ziniu.data.entity;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  * 课程评论类
  * Created by yeoman on 2017/10/19.
  */
+@Document
 public class CourseCmt {
     @Id
     protected ObjectId id;

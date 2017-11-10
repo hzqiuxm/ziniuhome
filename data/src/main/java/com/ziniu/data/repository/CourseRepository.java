@@ -19,4 +19,5 @@ public interface CourseRepository extends MongoRepository<Course, ObjectId> {
 
     List<Course> findAllByStage(@Param("stage") byte stage);
 
+    CourseSignup findCourseSignupById(@Param("id") String id);
 }

@@ -2,15 +2,16 @@ package com.ziniu.data.entity;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 课程类
  * Created by yeoman on 2017/7/14.
  */
-public class Course implements Serializable {
+@Document
+public class Course {
     @Id
     protected ObjectId id;
     protected String title;

@@ -1,7 +1,6 @@
 project(':service') {
 
-}
-
-dependencies{
-    compile project(':data')
+    dependencies{
+        compile project(':data')
+    }
 }

@@ -1,7 +1,5 @@
-package com.ziniu.security;
+package com.ziniu.control.security;
 
-import com.ziniu.data.entity.JwtUmUserBase;
-import com.ziniu.service.interfaces.IJwtUserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -16,14 +14,14 @@ import java.util.Collection;
 public class MyAuthenticationProvider implements AuthenticationProvider {
     private Logger log = Logger.getLogger(MyAuthenticationProvider.class);
     @Autowired
-    private IJwtUserService userService;
+    private JwtUserService userService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String loginName = authentication.getName();
         String password = (String)authentication.getCredentials();
         log.error("loginName = "+loginName+" password = " +password);
-        JwtUmUserBase userDetails = userService.loadUserByUsername(loginName);
+        JwtUserBase userDetails = userService.loadUserByUsername(loginName);
         if (userDetails ==null){
             log.error("loginName is not found ! ");
             throw new BadCredentialsException("loginName is not found ! ");

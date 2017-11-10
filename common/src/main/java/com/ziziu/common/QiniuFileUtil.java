@@ -72,11 +72,10 @@ public class QiniuFileUtil {
     public static boolean deleteImg(String bucket, String fileKey){
         try {
             Response response = bucketManager.delete(bucket, fileKey);
-            log.info(response.bodyString());
             log.info(response.toString());
-            DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
-            log.info(putRet.toString());
-            return true;
+            if (response.statusCode == Const.ReturnCode.OK) {
+                return true;
+            }
         } catch (QiniuException e) {
             log.error("错误码：" + e.code());
             log.error(e.response.toString());

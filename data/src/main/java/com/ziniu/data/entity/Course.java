@@ -2,15 +2,16 @@ package com.ziniu.data.entity;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 课程类
  * Created by yeoman on 2017/7/14.
  */
-public class Course implements Serializable {
+@Document
+public class Course {
     @Id
     protected ObjectId id;
     protected String title;
@@ -20,7 +21,7 @@ public class Course implements Serializable {
     protected String audience;
     protected Date gmtLecture;
     protected String addr;
-    protected Byte stage;
+    protected byte stage;
     protected String ruleCode;
     protected Res cover;
     protected Date gmtModify;
@@ -89,11 +90,11 @@ public class Course implements Serializable {
         this.addr = addr;
     }
 
-    public Byte getStage() {
+    public byte getStage() {
         return stage;
     }
 
-    public void setStage(Byte stage) {
+    public void setStage(byte stage) {
         this.stage = stage;
     }
 

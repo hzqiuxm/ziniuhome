@@ -1,6 +1,6 @@
 package com.ziniu.control;
 
-import com.ziniu.data.entity.JwtUmUserBase;
+import com.ziniu.control.security.JwtUserBase;
 import com.ziziu.common.Const;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
@@ -20,7 +20,7 @@ public class BaseController {
      * @return
      */
     String getLoginName(){
-        JwtUmUserBase userDetails = (JwtUmUserBase) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        JwtUserBase userDetails = (JwtUserBase) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(userDetails == null){
             return "未登录";
         }
@@ -33,12 +33,18 @@ public class BaseController {
      * @return
      */
     String getShowName(){
-        JwtUmUserBase userDetails = (JwtUmUserBase) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        JwtUserBase userDetails = (JwtUserBase) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(userDetails == null){
             return "未登录";
         }
         String showName =userDetails.getShowName();//测试用，等圣无忧实现
         return showName;
+    }
+
+    boolean isAdmin(){
+        //等圣无忧实现
+        boolean isAdmin = true;
+        return isAdmin;
     }
 
     ModelMap getSuccessResult(){
@@ -52,6 +58,14 @@ public class BaseController {
     ModelMap getSuccessResult(Object data){
         ModelMap modelMap = getSuccessResult();
         modelMap.put(DATA, data);
+        return modelMap;
+    }
+
+    ModelMap getSuccessResult(int failCode, String msg){
+        ModelMap modelMap = new ModelMap();
+        modelMap.put(SUCCESS, true);
+        modelMap.put(CODE, failCode);
+        modelMap.put(MSG, msg);
         return modelMap;
     }
 

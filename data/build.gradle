@@ -1,8 +1,12 @@
 project(':data'){
 
-}
-dependencies{
-    compile project(':common')
-    //mongodb数据库配置
-    //compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
+    dependencies{
+        compile project(':common')
+        //mongodb数据库配置
+        compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+        //compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+        //SpringSecurity配置
+        compile("org.springframework.boot:spring-boot-starter-security")
+        compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.2.RELEASE")
+    }
 }

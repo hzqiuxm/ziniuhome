@@ -2,8 +2,9 @@ package com.ziniu.control;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
-import com.ziniu.data.entity.JwtUmUserBase;
+import com.ziniu.control.security.JwtUserBase;
 import com.ziniu.control.security.jwtFilter.JwtTokenUtil;
+import com.ziniu.data.entity.User;
 import com.ziniu.service.interfaces.IUserBaseService;
 import com.ziziu.common.constants.ZiniuEnum;
 import org.apache.log4j.Logger;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
@@ -31,13 +33,14 @@ public class UserController extends BaseController{
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @RequestMapping(value = "/logn", method = RequestMethod.POST)
-    public JwtUmUserBase lo(HttpServletRequest request) throws Exception{
+    @RolesAllowed("ROLE_ADMIN")
+    @RequestMapping(value = "/jwtTest", method = RequestMethod.POST)
+    public User lo(HttpServletRequest request) throws Exception{
 
         String token = request.getHeader("Authorization").substring(6);
         String username = jwtTokenUtil.getUsernameFromToken(token);
-        JwtUmUserBase jwtUmUserBase = userBaseService.findByUsername(username);
-        return jwtUmUserBase;
+        User user = userBaseService.findByUsername(username);
+        return user;
     }
 
     // 只能admin权限能审批通过用户，post请求
@@ -56,7 +59,7 @@ public class UserController extends BaseController{
             user = (Map) JSONObject.parse(userInfo);
             userBaseService.addNewUser(user);
         } catch (Exception e){
-            log.error("用户注册失败,userInfo的数据格式不正确！");
+            log.error("用户注册失败,userInfo的数据格式不正确！"+ e.getMessage());
             return getFailResult(ZiniuEnum.USERINFO_ERROR.getKey(),ZiniuEnum.USERINFO_ERROR.getValue());
         }
         return getSuccessResult();

@@ -3,8 +3,7 @@ package com.ziniu.config;
 import com.ziniu.control.security.MyAuthenticationProvider;
 import com.ziniu.control.security.jwtFilter.JwtAuthenticationTokenFilter;
 import com.ziniu.control.security.jwtFilter.JwtTokenUtil;
-import com.ziniu.service.impl.JwtUserService;
-import com.ziniu.service.interfaces.IJwtUserService;
+import com.ziniu.control.security.JwtUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,7 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Bean
-    IJwtUserService jwtUserService(){
+    JwtUserService jwtUserService(){
         return new JwtUserService();
     }
 

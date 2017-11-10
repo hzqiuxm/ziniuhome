@@ -1,6 +1,6 @@
 package com.ziniu.control;
 
-import com.ziniu.data.entity.JwtUmUserBase;
+import com.ziniu.control.security.JwtUserBase;
 import com.ziziu.common.Const;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
@@ -20,7 +20,7 @@ public class BaseController {
      * @return
      */
     String getLoginName(){
-        JwtUmUserBase userDetails = (JwtUmUserBase) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        JwtUserBase userDetails = (JwtUserBase) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(userDetails == null){
             return "未登录";
         }
@@ -33,7 +33,7 @@ public class BaseController {
      * @return
      */
     String getShowName(){
-        JwtUmUserBase userDetails = (JwtUmUserBase) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        JwtUserBase userDetails = (JwtUserBase) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(userDetails == null){
             return "未登录";
         }

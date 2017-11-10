@@ -1,12 +1,14 @@
 package com.ziniu.data.entity;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 课程报名类
  * Created by yeoman on 2017/10/25.
  */
+@Document(collection = "course")
 public class CourseSignup extends Course {
 
     protected ArrayList<Signup> signups;

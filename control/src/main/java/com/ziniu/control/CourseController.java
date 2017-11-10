@@ -174,4 +174,21 @@ public class CourseController extends BaseController {
             return getSuccessResult();
         return getFailResult(Const.ReturnCode.F_303, "系统保存失败");
     }
+
+    /**
+     * 获取包括报名列表的课程信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/getSignups/{id}")
+    public ModelMap getSignups(@PathVariable String id){
+        if (StringUtils.isEmpty(id)){
+            return getFailResult(Const.ReturnCode.F_201, "参数错误");
+        }
+        Course courseSignup = courseRepository.findCourseSignupById(id);
+        if (null == courseSignup){
+            return getFailResult(Const.ReturnCode.F_301,"未查到课程信息");
+        }
+        return getSuccessResult(courseSignup);
+    }
 }

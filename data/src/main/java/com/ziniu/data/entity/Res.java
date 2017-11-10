@@ -1,12 +1,10 @@
 package com.ziniu.data.entity;
 
-import java.io.Serializable;
-
 /**
  * 资源类
  * Created by yeoman on 2017/10/20.
  */
-public class Res implements Serializable{
+public class Res {
     protected String bucket;
     protected String fileKey;
     protected String url;

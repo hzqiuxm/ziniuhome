@@ -2,15 +2,16 @@ package com.ziniu.data.entity;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by yeoman on 2017/11/6.
  */
-public class User implements Serializable {
+@Document
+public class User {
     @Id
     protected ObjectId id;
     protected String loginName;

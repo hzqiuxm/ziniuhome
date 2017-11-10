@@ -26,13 +26,11 @@ public class JwtUserBase extends User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
         List<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
         List<String> umSecUserRoles = this.getRoles();
         for (String secUserRole : umSecUserRoles){
             auths.add(new SimpleGrantedAuthority(secUserRole));
         }
-
         return auths;
     }
 

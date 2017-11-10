@@ -78,6 +78,7 @@ public class CourseController extends BaseController {
      * @return
      */
     @RolesAllowed({"ROLE_USER"})
+//    @RolesAllowed({"ROLE_ADMIN"})
     @GetMapping("/getList")
     public ModelMap getList(){
         return getSuccessResult(courseService.setKeys(courseService

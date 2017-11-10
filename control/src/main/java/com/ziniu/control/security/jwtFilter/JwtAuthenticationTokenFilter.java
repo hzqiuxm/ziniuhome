@@ -1,7 +1,7 @@
 package com.ziniu.control.security.jwtFilter;
 
 
-import com.ziniu.data.entity.JwtUmUserBase;
+import com.ziniu.control.security.JwtUserBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -40,9 +40,9 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             //如果token存在且 以 Bearer 开头 就开始JWT解析
             final String authToken = authHeader.substring(tokenHead.length()); // The part after "Bearer "
             String username = jwtTokenUtil.getUsernameFromToken(authToken);
-            logger.info("checking authentication " + username);
+            logger.info("checking authentication :" + username);
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                JwtUmUserBase userDetails = (JwtUmUserBase) this.userService.loadUserByUsername(username);
+                JwtUserBase userDetails = (JwtUserBase) this.userService.loadUserByUsername(username);
                 if (jwtTokenUtil.validateToken(authToken, userDetails)) {
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authentication.setDetails( new WebAuthenticationDetailsSource().buildDetails(request) );

@@ -8,18 +8,17 @@ import com.ziniu.data.repository.UserInfoRepository;
 import com.ziniu.data.repository.UserRepository;
 import com.ziniu.service.interfaces.IUserBaseService;
 import com.ziziu.common.QiniuFileUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-public class UserBaseService implements IUserBaseService{
+public class UserBaseServiceImpl implements IUserBaseService{
 
     @Autowired
     UserInfoRepository userInfoRepository;
-    @Autowired
-    UserRepository userRepository;
 
     //注册用户
     @Override
@@ -56,8 +55,7 @@ public class UserBaseService implements IUserBaseService{
             temp = 1;
         }
         userInfo1.setSex(temp);
-
-        userRepository.insert(user);
+        BeanUtils.copyProperties(user,userInfo1);
         userInfoRepository.insert(userInfo1);
     }
 

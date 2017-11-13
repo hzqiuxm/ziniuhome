@@ -33,7 +33,7 @@ public class UserController extends BaseController{
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @RolesAllowed("ROLE_ADMIN")
+    @RolesAllowed({"ROLE_ADMIN"})
     @RequestMapping(value = "/jwtTest", method = RequestMethod.POST)
     public User lo(HttpServletRequest request) throws Exception{
 
@@ -44,7 +44,7 @@ public class UserController extends BaseController{
     }
 
     // 只能admin权限能审批通过用户，post请求
-//    @RolesAllowed("ROLE_ADMIN")
+//    @RolesAllowed({"ROLE_ADMIN"})
 
     @PostMapping("/register")
     @ResponseBody

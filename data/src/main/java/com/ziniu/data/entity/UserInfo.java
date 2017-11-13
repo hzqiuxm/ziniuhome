@@ -1,8 +1,11 @@
 package com.ziniu.data.entity;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * Created by yeoman on 2017/11/6.
  */
+@Document(collection = "User")
 public class UserInfo extends User {
     protected String cellNum;
     protected byte sex;

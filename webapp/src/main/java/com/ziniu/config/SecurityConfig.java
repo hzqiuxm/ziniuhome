@@ -79,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     public void configure(WebSecurity web) throws Exception {
         //因为boot 默认的静态资源位置就是在resource/static目录下面 ,这里我做一个测试
-        web.ignoring().antMatchers("/views/**",
+        web.ignoring().antMatchers("/views/**/*.html",
                                                 "/register",
                                                 "/login/getToken",
                                                 "/**/*.ico",

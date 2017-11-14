@@ -33,7 +33,7 @@ user {
 #### 规则配置(集合/文档) config
 - *配置信息，可以做配置，也可以做规则配置*
 ```
-Config {
+config {
     "code" : String(64) //配置编码，主键
     "name" : String(64) //配置名称
     "type" : Byte(1) //类型，默认为0

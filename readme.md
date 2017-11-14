@@ -178,7 +178,7 @@ courseCmt {
 ```
 /**
  * Copyright © 2017年 ziniuxiaozhu. All rights reserved.
- * @Author 临江仙 hzqiuxm@163.com
+ * @author 临江仙 hzqiuxm@163.com
  * @Date  ${DATE} ${TIME}
  * 
  */

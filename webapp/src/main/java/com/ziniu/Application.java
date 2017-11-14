@@ -10,7 +10,7 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 /**
  * Copyright © 2016年 author. All rights reserved.
  *
- * @Author 临江仙 hxqiuxm@163.com
+ * @author 临江仙 hxqiuxm@163.com
  * @Date 2017/3/1 0001 10:39
  */
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class,HibernateJpaAutoConfiguration.class})

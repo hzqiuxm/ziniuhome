@@ -10,7 +10,7 @@
 #### 用户(集合/文档) user
 - *用户相关信息，包括用户信息和角色。*
 ```
-User {
+user {
     "id" : ObjectId //主键ID
     "loginName" : String(32) //登录用户名
     "showName" : String(32) //显示的用户名称
@@ -33,7 +33,7 @@ User {
 #### 规则配置(集合/文档) config
 - *配置信息，可以做配置，也可以做规则配置*
 ```
-Config {
+config {
     "code" : String(64) //配置编码，主键
     "name" : String(64) //配置名称
     "type" : Byte(1) //类型，默认为0
@@ -50,7 +50,7 @@ Config {
 #### 节操流水(集合/文档) jcRec
 - *节操流水，记录节操流通信息*
 ```
-JcRec {
+jcRec {
     "id" : ObjectId //主键ID
     "outer" : String(32) //节操流出方的loginName
     "amount" : Integer //数量
@@ -62,7 +62,7 @@ JcRec {
 #### 课程(集合/文档) course
 - *课程相关信息，包括课程资源信息。*
 ```
-Course {
+course {
     "id" : ObjectId //主键ID
     "title" : String(32) //主题
     "descrip" : String(128) //课程介绍
@@ -122,7 +122,7 @@ Course {
 #### 课程评论(集合/文档) courseCmt
 - *课程评论相关信息，包括评论课程的用户、评论、被赞父评论ID等信息。*
 ```
-CourseCmt {
+courseCmt {
     "id" : ObjectId //主键ID
     "courseId" : Long(11) //课程ID
     "loginName" : String(32) //登录用户名
@@ -135,6 +135,35 @@ CourseCmt {
     "gmtModify" : Date //修改时间
 }
 ```
+
+---
+
+## 子模块说明
+ - common：公共层，一些共用工具类、静态常量类、枚举类等
+ - data：数据层，数据存取接口、实体对象等
+ - service：服务层，对数据功能进行封装的接口，承担外部接口与数据层的桥梁，实现复杂业务逻辑的处理
+ - control：控制层，提供Http接口，承担请求的权限和安全的控制，参数的校验和简单业务逻辑的控制
+ - webapp：Web层，启动入口、配置等，前端页面、脚本、样式和资源等
+## 开发规范
+### 配置
+ - 使用Gradle管理依赖，依赖的包要加在就近引用的子模块，各模块避免重复引入
+ - 配置文件统一放在/resources/config目录下，要求精简，并且风格统一，不保留无用的配置
+ - 框架配置类统一放在webapp子模块的config包下
+### 后端
+ - 实体对象类都要加Document注解，子类与父类共用同一集合的，子类需要使用collection指定集合名
+ - 持久层接口统一从MongoRepository接口继承，其中自定义的方法请遵循Mongodb约定命名
+ - 服务层接口建议继承BaseService接口，实现对返回的数据进行封装，以ModelMap类型返回，设置对象主键为key，对象为value
+ - 服务层也要做必要的校验和异常处理，以及格式化日志输出
+ - 控制层接口建议继承BaseController类，返回数据请调用BaseController类中封装的方法
+ - Http接口非特殊不返回页面，统一返回JSON格式的数据，并按下一条规范进行封装
+ - 返回数据封装字段：success、code、msg、data，返回失败时，无数据data可以省略
+### 前端
+ - Html页面统一放在/resources/static目录下，并且按功能或模块分子目录
+ - Js和Css等统一放在/resources/public目录下，并且按功能或模块分子目录
+ - 对静态资源的引用统一使用项目根路径
+ - 统一使用Ajax请求后端接口
+ 
+---
 
 ### security过滤框架的使用注意點：
 

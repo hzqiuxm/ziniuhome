@@ -1,16 +1,12 @@
 project(':data'){
 
-}
-/*# ===================================================================
-    # SPRING BOOT STARTER
-    #
-    # 注意：优先推荐通过SpringBootStarter配置，这样可以自动处理依赖以及精简依赖项
-    #
-    # ===================================================================*/
-dependencies{
-    compile project(':common')
-    //redis数据库配置
-    compile("org.springframework.boot:spring-boot-starter-data-redis:${springBootVersion}")
-    //mongodb数据库配置
-    //compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
+    dependencies{
+        compile project(':common')
+        //mongodb数据库配置
+        compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+        //compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+        //SpringSecurity配置
+        compile("org.springframework.boot:spring-boot-starter-security")
+        compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.2.RELEASE")
+    }
 }

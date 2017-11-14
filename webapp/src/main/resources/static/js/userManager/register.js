@@ -37,7 +37,7 @@ function addUser() {
         success:function(data){
             if(data.code.toString()==200){
                 alert("用户注册成功！！")
-                $(".res").click();  //重置表单
+                document.location = "/login/view"
             }else{
                 alert("用户信息导入异常！")
             }

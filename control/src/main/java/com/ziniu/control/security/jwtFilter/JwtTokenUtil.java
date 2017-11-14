@@ -1,6 +1,6 @@
-package com.ziniu.security.jwtFilter;
+package com.ziniu.control.security.jwtFilter;
 
-import com.ziniu.data.entity.JwtUmUserBase;
+import com.ziniu.control.security.JwtUserBase;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -120,7 +120,7 @@ public class JwtTokenUtil implements Serializable {
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
-        JwtUmUserBase user = (JwtUmUserBase) userDetails;
+        JwtUserBase user = (JwtUserBase) userDetails;
         final String username = getUsernameFromToken(token);
         final Date created = getCreatedDateFromToken(token);
         return (

@@ -1,52 +1,16 @@
 project(':webapp'){
     apply plugin: 'war'
-    apply plugin: 'org.springframework.boot'
-}
-
-buildscript {
-    repositories {
-        maven{url 'http://maven.aliyun.com/nexus/content/groups/public/'}
-        jcenter()
-    }
 
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        /*这个是本地开发时用来支持热部署的，上开发/测试/生产环境时，建议注释掉，以免影响性能。*/
-        classpath ("org.springframework:springloaded:${springloadedVersion}")
+        compile project(':control')
+        providedCompile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        providedCompile("net.sourceforge.nekohtml:nekohtml:1.9.22")
+        //WEB容器配置
+        providedCompile("org.springframework.boot:spring-boot-starter-tomcat")
+        //providedCompile("org.springframework.boot:spring-boot-starter-jetty")
     }
-}
-/*# ===================================================================
-    # SPRING BOOT STARTER
-    #
-    # 注意：优先推荐通过SpringBootStarter配置，这样可以自动处理依赖以及精简依赖项
-    #
-    # ===================================================================*/
-dependencies {
-    compile project(':control')
-    //WEB容器配置
-    //这里添加会导致版本冲突出现 （注释掉） Unable to start EmbeddedWebApplicationContext due to missing EmbeddedServletContainerFactory bean
-    //providedCompile("org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}")
-    //providedCompile("org.springframework.boot:spring-boot-starter-jetty")
-
-    //WEB服务
-    compile("org.springframework.boot:spring-boot-starter-web")
-
-    //SpringSecurity配置
-    compile('org.springframework.boot:spring-boot-starter-security')
-}
-
-jar {
-    baseName = "znxz"
 }
 
 war {
     baseName = "znxz"
-}
-
-bootRun {
-    addResources = true
-}
-
-bootRepackage {
-    mainClass = "com.ziniu.Application"
 }

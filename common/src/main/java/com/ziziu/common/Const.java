@@ -75,4 +75,16 @@ public interface Const {
             mapper.put(OPEN, "已公开");
         }
     }
+
+    /**
+     * 资源目录
+     */
+    final class ResDir {
+        /** 课程封面 */
+        public static final String COURSE_COVER = "cover/";
+        /** 课程PPT */
+        public static final String COURSE_PPT = "ppt/";
+        /** 用户头像 */
+        public static final String USER_AVATAR = "avatar/";
+    }
 }

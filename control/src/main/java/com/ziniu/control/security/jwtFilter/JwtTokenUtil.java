@@ -1,7 +1,6 @@
 package com.ziniu.control.security.jwtFilter;
 
 import com.ziniu.control.security.JwtUserBase;
-import com.ziniu.data.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

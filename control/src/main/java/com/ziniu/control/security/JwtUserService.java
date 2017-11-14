@@ -1,23 +1,22 @@
 package com.ziniu.control.security;
 
 import com.ziniu.data.entity.User;
-import com.ziniu.data.repository.UserRepository;
+import com.ziniu.data.repository.UserInfoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
 //@Service
 public class JwtUserService implements UserDetailsService{
 
     @Autowired
-    private UserRepository userRepository;
+    private UserInfoRepository userInfoRepository;
 
     @Override
     public JwtUserBase loadUserByUsername(String username) throws UsernameNotFoundException {
         //通过username去找对应的用户信息
-        User user = userRepository.findUserByLoginName(username);
+        User user = userInfoRepository.findUserByLoginName(username);
         if(user == null){
             throw new UsernameNotFoundException("can not find loginName in database, please try again!");
         }

@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import com.ziniu.control.security.JwtUserBase;
 import com.ziniu.control.security.jwtFilter.JwtTokenUtil;
-import com.ziniu.data.repository.UserRepository;
+import com.ziniu.data.repository.UserInfoRepository;
 import com.ziziu.common.HttpUrlConnection;
 import com.ziziu.common.constants.ZiniuEnum;
 import org.apache.log4j.Logger;
@@ -29,7 +29,7 @@ public class loginController extends BaseController{
     @Autowired
     JwtTokenUtil jwtTokenUtil;
     @Autowired
-    UserRepository userRepository;
+    UserInfoRepository userInfoRepository;
     @GetMapping("/view")
     public String login(){
         log.info("loginController ：进入到登陆页面 ！");

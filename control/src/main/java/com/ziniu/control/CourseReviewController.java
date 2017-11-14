@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.Date;
-import java.util.List;
 
 /**
  * 课程审核
@@ -28,10 +28,8 @@ public class CourseReviewController extends BaseController {
      * @return
      */
     @GetMapping("/course/reviewList")
+    @RolesAllowed({"ROLE_ADMIN"})
     public ModelMap reviewList(){
-        if(!isAdmin()){
-            return getFailResult(Const.ReturnCode.F_202, "无操作权限");
-        }
         return getSuccessResult(courseService.setKeys(courseService.getReviewList()));
     }
 
@@ -44,6 +42,7 @@ public class CourseReviewController extends BaseController {
      * @return
      */
     @PostMapping("/course/review")
+    @RolesAllowed({"ROLE_ADMIN"})
     public ModelMap review(String id, Byte stage, Long gmtLecture, String addr) {
         if (StringUtils.isEmpty(id) || null == stage
                 || (stage != Const.CourseStage.STAY && stage != Const.CourseStage.SIGNUP)){

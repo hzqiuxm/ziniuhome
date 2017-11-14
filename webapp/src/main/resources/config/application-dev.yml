@@ -5,7 +5,7 @@ spring:
     #mongodb
     data:
       mongodb:
-        host: 120.26.231.72
+        host: 139.224.42.42
         port: 27017
         database: znxz
 

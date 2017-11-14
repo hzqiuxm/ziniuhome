@@ -2,21 +2,10 @@
 spring:
     application:
         name: dev
-    #redis
-    redis:
-      database: 0
-      host: 139.224.42.42
-      password: admin
-      pool:
-        max-active: 8
-        min-idle: 0
-        max-wait: -1
-        max-idle: 8
-      port: 6379
+    #mongodb
     data:
-    # MongoDB配置
       mongodb:
-        host: 139.224.42.42
+        host: 120.26.231.72
         port: 27017
         database: znxz
 
@@ -46,9 +35,9 @@ jwt:
   header: "Authorization"
   secret: mySecret
   expiration: 604800
-  tokenHead: "Bearer "
+  tokenHead: "Bearer"
   route:
     authentication:
       path: auth
       refresh: refresh
-      register: "auth/register"
+register: "auth/register"

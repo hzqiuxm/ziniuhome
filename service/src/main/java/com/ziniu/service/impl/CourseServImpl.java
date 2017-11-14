@@ -102,8 +102,10 @@ public class CourseServImpl implements ICourseService {
 
     @Override
     public boolean update(Course course) {
-        if (null == course)
+        if (null == course){
             return false;
+        }
+
 
         course.setGmtModify(new Date());
         courseRepository.save(course);

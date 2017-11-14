@@ -6,7 +6,7 @@ spring:
     data:
       mongodb:
         host: 139.224.42.42
-        port: 27017
+        port: 27117
         database: znxz
 
 #日志配置

@@ -114,6 +114,8 @@ function setStage(id) {
         case 1: return "审核中";
         case 2: return "已滞留";
         case 3:
+            var html = ziniu.commons.dateFmt("yyyy-MM-dd hh:mm", new Date(courseList[id].gmtLecture));
+            //if (courseList[id].lecturere)//等拿到用户登录名才行
             return ziniu.commons.dateFmt("yyyy-MM-dd hh:mm", new Date(courseList[id].gmtLecture))
                 + "<input type=\"button\" onclick=\"signup('"+id+"')\" value=\"报名\">";
         case 4: return "已闭课";

@@ -2,7 +2,6 @@ package com.ziniu.control;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
-import com.ziniu.control.security.JwtUserBase;
 import com.ziniu.control.security.jwtFilter.JwtTokenUtil;
 import com.ziniu.data.entity.User;
 import com.ziniu.service.interfaces.IUserBaseService;

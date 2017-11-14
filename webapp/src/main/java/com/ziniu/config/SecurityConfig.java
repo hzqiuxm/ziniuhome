@@ -1,8 +1,8 @@
 package com.ziniu.config;
 
 import com.ziniu.control.security.MyAuthenticationProvider;
-import com.ziniu.control.security.jwtFilter.JwtAuthenticationTokenFilter;
-import com.ziniu.control.security.jwtFilter.JwtTokenUtil;
+import com.ziniu.control.security.jwtfilter.JwtAuthenticationTokenFilter;
+import com.ziniu.control.security.jwtfilter.JwtTokenUtil;
 import com.ziniu.control.security.JwtUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

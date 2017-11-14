@@ -1,4 +1,4 @@
-package com.ziniu.control.security.jwtFilter;
+package com.ziniu.control.security.jwtfilter;
 
 
 import com.ziniu.control.security.JwtUserBase;

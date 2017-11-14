@@ -10,7 +10,7 @@
 #### 用户(集合/文档) user
 - *用户相关信息，包括用户信息和角色。*
 ```
-User {
+user {
     "id" : ObjectId //主键ID
     "loginName" : String(32) //登录用户名
     "showName" : String(32) //显示的用户名称
@@ -50,7 +50,7 @@ Config {
 #### 节操流水(集合/文档) jcRec
 - *节操流水，记录节操流通信息*
 ```
-JcRec {
+jcRec {
     "id" : ObjectId //主键ID
     "outer" : String(32) //节操流出方的loginName
     "amount" : Integer //数量
@@ -62,7 +62,7 @@ JcRec {
 #### 课程(集合/文档) course
 - *课程相关信息，包括课程资源信息。*
 ```
-Course {
+course {
     "id" : ObjectId //主键ID
     "title" : String(32) //主题
     "descrip" : String(128) //课程介绍
@@ -122,7 +122,7 @@ Course {
 #### 课程评论(集合/文档) courseCmt
 - *课程评论相关信息，包括评论课程的用户、评论、被赞父评论ID等信息。*
 ```
-CourseCmt {
+courseCmt {
     "id" : ObjectId //主键ID
     "courseId" : Long(11) //课程ID
     "loginName" : String(32) //登录用户名

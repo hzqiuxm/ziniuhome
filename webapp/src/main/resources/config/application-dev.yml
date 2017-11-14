@@ -5,8 +5,8 @@ spring:
     #mongodb
     data:
       mongodb:
-        host: 120.26.231.72
-        port: 27017
+        host: 139.224.42.42
+        port: 27117
         database: znxz
 
 #日志配置
@@ -40,4 +40,4 @@ jwt:
     authentication:
       path: auth
       refresh: refresh
-      register: "auth/register"
+register: "auth/register"

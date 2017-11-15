@@ -2,6 +2,7 @@ package com.ziniu.control;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+import com.ziniu.control.security.JwtUserBase;
 import com.ziniu.control.security.jwtfilter.JwtTokenUtil;
 import com.ziniu.data.entity.User;
 import com.ziniu.service.interfaces.IUserBaseService;
@@ -9,6 +10,7 @@ import com.ziziu.common.constants.ZiniuEnum;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +22,16 @@ import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+/**
+ * Copyright © 2017年 ziniuxiaozhu. All rights reserved.
+ *
+ * @author shengwuyou
+ * @data 2017/11/15 0015 14:17
+ */
+
+
 @Controller
+@RequestMapping("/user")
 @EnableEncryptableProperties
 public class UserController extends BaseController{
     private Logger log =Logger.getLogger(UserController.class);
@@ -31,19 +42,6 @@ public class UserController extends BaseController{
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
-
-    @RolesAllowed({"ROLE_ADMIN"})
-    @RequestMapping(value = "/jwtTest", method = RequestMethod.POST)
-    public User lo(HttpServletRequest request) throws Exception{
-
-        String token = request.getHeader("Authorization").substring(6);
-        String username = jwtTokenUtil.getUsernameFromToken(token);
-        User user = userBaseService.findByUsername(username);
-        return user;
-    }
-
-    // 只能admin权限能审批通过用户，post请求
-//    @RolesAllowed({"ROLE_ADMIN"})
 
     @PostMapping("/register")
     @ResponseBody
@@ -63,4 +61,23 @@ public class UserController extends BaseController{
         }
         return getSuccessResult();
     }
+    /**
+     * 获取用户信息
+     */
+    @RolesAllowed({"ROLE_USER"})
+    @ResponseBody
+    @RequestMapping(value = "/getUserInfo", method = RequestMethod.POST)
+    public ModelMap getUserInfo(){
+        JwtUserBase userDetails = (JwtUserBase) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(userDetails == null){
+            return getFailResult(ZiniuEnum.USER_NO_LOGIN.getKey(),ZiniuEnum.USER_NO_LOGIN.getValue());
+        }
+        User user = new User();
+        user.setShowName(userDetails.getShowName());
+        user.setLoginName(userDetails.getLoginName());
+        user.setRoles(userDetails.getRoles());
+        return getSuccessResult(user);
+    }
+
+
 }

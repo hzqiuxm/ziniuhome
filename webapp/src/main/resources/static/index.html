@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>LOGIN</title>
-    <link rel="stylesheet" type="text/css" href="../css/login/login.css"/>
-    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/user/css/login/login.css"/>
+    <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
         var token = null;
         function ajaxSubmit(){
@@ -28,7 +28,7 @@
                         }else{
                             localStorage.setItem("token",token)  //本地存储token的值
                         }
-                        window.location.href="/course/courseList.html";
+                        window.location.href="/userviews/start.html";
                     }
                 },
                 error:function (XMLHttpRequest, textStatus, errorThrown){
@@ -63,7 +63,7 @@
     </script>
 </head>
 <body>
-<a id="register" href="/views/register.html">REGISTER</a>
+<a id="register" href="/userviews/register.html" >REGISTER</a>
 <span class="login_form"  id="loginForm">
     <div class="content">
         <p2><div id="header" >SIGN IN</div></p2>

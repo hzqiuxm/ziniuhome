@@ -172,3 +172,17 @@ courseCmt {
   
 ####书写后端的注意点 
   -  后端写接口的时候控制访问的权限，通过注解的方式 (例子：@RolesAllowed（{"ROLE_NAME"}）  @PermitAll   @DenyAll   )
+  
+##### 编码规约
+- 所有的人都要设置文件头，格式如下：
+```
+/**
+ * Copyright © 2017年 ziniuxiaozhu. All rights reserved.
+ * @author 临江仙 hzqiuxm@163.com
+ * @Date  ${DATE} ${TIME}
+ * 
+ */
+```
+
+- 每个类和每个方法都要写上注释，注释请参考优秀的spring源码
+- 安装阿里代码规约插件和findbug插件，提交时务必对自己代码进行扫描

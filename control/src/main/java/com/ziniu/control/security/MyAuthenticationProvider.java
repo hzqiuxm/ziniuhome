@@ -10,7 +10,12 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
-
+/**
+ * Copyright © 2016年 author. All rights reserved.
+ *
+ * @Author 临江仙 hxqiuxm@163.com
+ * @Date 2017/3/1 0001 10:39
+ */
 public class MyAuthenticationProvider implements AuthenticationProvider {
     private Logger log = Logger.getLogger(MyAuthenticationProvider.class);
     @Autowired

@@ -13,6 +13,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Copyright © 2017年 ziniuxiaozhu. All rights reserved.
+ *
+ * @author shengwuyou
+ * @data 2017/11/15 0015 14:17
+ */
+
 @Component
 public class JwtTokenUtil implements Serializable {
 

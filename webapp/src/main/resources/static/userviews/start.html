@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <title>测试页面</title>
+    <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
+    <script  type="text/javascript" src="/ajaxUtil.js"></script>
+    <script type="text/javascript" >
+       function getUserInfo(){
+            $.ajax({
+                type: 'POST',
+                url:  '/user/getUserInfo',
+                cache : false,
+                dataType: 'json',
+                async:false,
+                timeout:3000,
+                success:function(data){
+                    if(data.code.toString()==200){
+
+                        $(".header_out_Log").append("<span class='header_name'>"+data.data.showName.toString()+"</span>");
+                        $(".header_out_Log").append("<img class='logout_img'  src='/user/img/logout.png' alt='登出' onclick='logout()'>");
+                    }else{
+                        alert("用户信息导入异常！")
+                    }
+                },
+                error:function(){
+                    alert("error!!!!");
+                }
+            });
+        }
+
+        function logout() {
+            location.href="/logout"
+        }
+    </script>
+    <style>
+        body {
+            margin: 0 1%;
+            background-color: #f8f8f8;
+            font-family: "微软雅黑 Light";
+        }
+        .layout-header{   height: 100px; background: linear-gradient(80deg,#b2acac,#7d2525);}
+        .header-logo{     font-size: -webkit-xxx-large;  position: absolute;  left: 20px; }
+        .header_name{   position: absolute; top: 15px;  }
+        .header_out_Log {  position: absolute; right: 100px; top: 20px; width: 200px;  color: wheat; }
+        .logout_img{  width: 50px; position: absolute; right: 1px;}
+    </style>
+</head>
+<body onload="getUserInfo()">
+<div class="layout-header">
+    <span class="header-logo"> ZINIU  </span>
+    <span class="header_out_Log"></span>
+</div>
+</body>
+</html>

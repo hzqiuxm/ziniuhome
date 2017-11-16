@@ -15,6 +15,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
+/**
+ * Copyright © 2017年 ziniuxiaozhu. All rights reserved.
+ *
+ * @author shengwuyou
+ * @data 2017/11/15 0015 14:17
+ */
+
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(jsr250Enabled = true) //http://www.mamicode.com/info-detail-1150834.html

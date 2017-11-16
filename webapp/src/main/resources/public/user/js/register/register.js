@@ -1,3 +1,12 @@
+
+/**
+ * Copyright © 2017年 ziniuxiaozhu. All rights reserved.
+ *
+ * @author shengwuyou
+ * @data 2017/11/15 0015 14:17
+ */
+
+
 //初始化下拉框
 $(function () {
     initSelect($(".age"),55,16,false,null);
@@ -28,7 +37,7 @@ function addUser() {
     if(user==0) return;
     $.ajax({
         type: 'POST',
-        url:  '/register',
+        url:  '/user/register',
         cache : false,
         dataType: 'json',
         data:{"userInfo":user+""},
@@ -37,7 +46,7 @@ function addUser() {
         success:function(data){
             if(data.code.toString()==200){
                 alert("用户注册成功！！")
-                document.location = "/login/view"
+                document.location = "/login"
             }else{
                 alert("用户信息导入异常！")
             }

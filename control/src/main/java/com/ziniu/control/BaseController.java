@@ -1,6 +1,7 @@
 package com.ziniu.control;
 
 import com.ziniu.control.security.JwtUserBase;
+import com.ziniu.data.entity.User;
 import com.ziziu.common.Const;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
@@ -41,10 +42,20 @@ public class BaseController {
         return showName;
     }
 
-    boolean isAdmin(){
-        //等圣无忧实现
-        boolean isAdmin = true;
-        return isAdmin;
+    /**
+     * 获取当前用户的信息
+     * @return
+     */
+    User getJwtUserBase(){
+        JwtUserBase jwtUserBase = (JwtUserBase) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(jwtUserBase == null){
+            return null;
+        }
+        User user = new User();
+        user.setLoginName(jwtUserBase.getLoginName());
+        user.setShowName(jwtUserBase.getShowName());
+        user.setRoles(jwtUserBase.getRoles());
+        return user;
     }
 
     ModelMap getSuccessResult(){

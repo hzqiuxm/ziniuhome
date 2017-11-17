@@ -61,7 +61,12 @@ public class CourseServImpl implements ICourseService {
     }
 
     @Override
-    public ModelMap setKeys(List<Course> list) {
+    public List<CourseSignup> getCourseSignupListByLecturerOrStage(String lecturer, byte stage) {
+        return courseRepository.findListByLecturerOrStage(lecturer, stage);
+    }
+
+    @Override
+    public ModelMap setKeys(List<? extends Course> list) {
         if(list == null)
             return null;
 

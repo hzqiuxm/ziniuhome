@@ -7,7 +7,8 @@ import com.ziniu.control.security.jwtfilter.JwtTokenUtil;
 import com.ziniu.data.repository.UserInfoRepository;
 import com.ziziu.common.HttpUrlConnection;
 import com.ziziu.common.constants.ZiniuEnum;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,7 +32,7 @@ import java.util.Map;
 @EnableEncryptableProperties
 @RequestMapping("login")
 public class loginController extends BaseController{
-    private Logger log = Logger.getLogger(loginController.class);
+    private static final Logger log = LoggerFactory.getLogger(loginController.class);
 
     @Autowired
     JwtTokenUtil jwtTokenUtil;

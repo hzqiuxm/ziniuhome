@@ -8,6 +8,8 @@ import com.ziniu.data.repository.CourseRepository;
 import com.ziniu.service.interfaces.ICourseService;
 import com.ziziu.common.Const;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -24,6 +26,7 @@ import java.util.Date;
 @RestController
 @RequestMapping("/course")
 public class CourseController extends BaseController {
+    private static final Logger log = LoggerFactory.getLogger(CourseController.class);
 
     @Autowired
     private CourseRepository courseRepository;
@@ -78,11 +81,21 @@ public class CourseController extends BaseController {
      * @return
      */
     @RolesAllowed({"ROLE_USER"})
-//    @RolesAllowed({"ROLE_ADMIN"})
     @GetMapping("/getList")
     public ModelMap getList(){
         return getSuccessResult(courseService.setKeys(courseService
                 .getCourseListByLecturerOrStage(getLoginName(), Const.CourseStage.SIGNUP)));
+    }
+
+    /**
+     * 获取课程列表
+     * @return
+     */
+    @RolesAllowed({"ROLE_USER"})
+    @GetMapping("/getCourseSignups")
+    public ModelMap getCourseSignups(){
+        return getSuccessResult(courseService.setKeys(courseService
+                .getCourseSignupListByLecturerOrStage(getLoginName(), Const.CourseStage.SIGNUP)));
     }
 
     /**

@@ -28,7 +28,7 @@
                         }else{
                             localStorage.setItem("token",token)  //本地存储token的值
                         }
-                        window.location.href="/userviews/start.html";
+                        window.location.href="/course/courseList.html";
                     }
                 },
                 error:function (XMLHttpRequest, textStatus, errorThrown){
@@ -63,13 +63,16 @@
     </script>
 </head>
 <body>
-<a id="register" href="/userviews/register.html" >REGISTER</a>
+<a id="register" href="/register.html" >REGISTER</a>
 <span class="login_form"  id="loginForm">
     <div class="content">
         <p2><div id="header" >SIGN IN</div></p2>
         <div id="d1" >loginName<a id="a1">： <input type="text" name="loginName"></a></div>
         <div id="d2" >password<a id="a2">： <input type="password" name="password" > </a></div>
-        <div id="d3" > <button id="b1" onclick="ajaxSubmit()">LOGIN</button>  <button id="b2" type="reset">RESET</button></div>
+        <div id="d3" >
+            <button id="b1" onclick="ajaxSubmit()">LOGIN</button>
+            <button id="b2" type="reset">RESET</button>
+        </div>
     </div>
 </span>
 </body>

@@ -25,6 +25,8 @@ public interface Const {
 
         /** 未查到数据 */
         public static final int F_301 = 301;
+        /** 用户已存在 */
+        public static final int F_302 = 302;
         /** 系统保存失败 */
         public static final int F_303 = 303;
     }
@@ -41,6 +43,16 @@ public interface Const {
          * 课程发布时指定规则
          */
         public static final String COURSE_PUBLISH = "COURSE_PUBLISH_20171031";
+    }
+
+    /** 用户状态 */
+    final class UserStage {
+        /** 待审核 */
+        public static final byte STAGE_0 = 0;
+        /** 正常 */
+        public static final byte STAGE_1 = 1;
+        /** 保留 */
+        public static final byte STAGE_2 = 2;
     }
 
     /** 课程阶段 */

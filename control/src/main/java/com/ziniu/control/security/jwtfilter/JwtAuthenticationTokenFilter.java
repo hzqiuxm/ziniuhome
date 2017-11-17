@@ -2,8 +2,8 @@ package com.ziniu.control.security.jwtfilter;
 
 
 import com.ziniu.control.security.JwtUserBase;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,7 +27,7 @@ import java.io.IOException;
 
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
-    private final Log logger = LogFactory.getLog(this.getClass());
+    private static final Logger log = LoggerFactory.getLogger(JwtAuthenticationTokenFilter.class);
     @Autowired
     private UserDetailsService userService;
 
@@ -49,7 +49,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             final String authToken = authHeader.substring(tokenHead.length());
             String username = jwtTokenUtil.getUsernameFromToken(authToken);
 
-            logger.info("checking authentication for user:" + username);
+            log.info("checking authentication for user:" + username);
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 JwtUserBase userDetails = (JwtUserBase) this.userService.loadUserByUsername(username);
@@ -57,7 +57,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authentication.setDetails( new WebAuthenticationDetailsSource().buildDetails(request) );
 
-                    logger.info("authenticated user " + username + ", setting security context");
+                    log.info("authenticated user " + username + ", setting security context");
 
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }

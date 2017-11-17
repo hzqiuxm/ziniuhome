@@ -157,6 +157,7 @@ courseCmt {
  - 控制层接口建议继承BaseController类，返回数据请调用BaseController类中封装的方法
  - Http接口非特殊不返回页面，统一返回JSON格式的数据，并按下一条规范进行封装
  - 返回数据封装字段：success、code、msg、data，返回失败时，无数据data可以省略
+ - 日志输出建议使用log，统一使用slf4j的标准包
 ### 前端
  - Html页面统一放在/resources/static目录下，并且按功能或模块分子目录
  - Js和Css等统一放在/resources/public目录下，并且按功能或模块分子目录

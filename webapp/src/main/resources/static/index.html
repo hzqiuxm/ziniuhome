@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>LOGIN</title>
-    <link rel="stylesheet" type="text/css" href="../css/login/login.css"/>
-    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/user/css/login/login.css"/>
+    <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
         var token = null;
         function ajaxSubmit(){
@@ -63,13 +63,16 @@
     </script>
 </head>
 <body>
-<a id="register" href="/views/register.html">REGISTER</a>
+<a id="register" href="/register.html" >REGISTER</a>
 <span class="login_form"  id="loginForm">
     <div class="content">
         <p2><div id="header" >SIGN IN</div></p2>
         <div id="d1" >loginName<a id="a1">： <input type="text" name="loginName"></a></div>
         <div id="d2" >password<a id="a2">： <input type="password" name="password" > </a></div>
-        <div id="d3" > <button id="b1" onclick="ajaxSubmit()">LOGIN</button>  <button id="b2" type="reset">RESET</button></div>
+        <div id="d3" >
+            <button id="b1" onclick="ajaxSubmit()">LOGIN</button>
+            <button id="b2" type="reset">RESET</button>
+        </div>
     </div>
 </span>
 </body>

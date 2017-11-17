@@ -1,6 +1,14 @@
 project(':webapp'){
     apply plugin: 'war'
 
+    buildscript{
+        dependencies {
+            classpath("org.springframework.boot:spring-boot-gradle-plugin")
+            /*这个是本地开发时用来支持热部署的，上开发/测试/生产环境时，建议注释掉，以免影响性能。*/
+            classpath ("org.springframework:springloaded:${springloadedVersion}")
+        }
+    }
+
     dependencies {
         compile project(':control')
         providedCompile("org.springframework.boot:spring-boot-starter-thymeleaf")
@@ -11,6 +19,17 @@ project(':webapp'){
     }
 }
 
+jar {
+    baseName = "znxz"
+}
+
 war {
     baseName = "znxz"
+}
+bootRun {
+    addResources = true
+}
+
+bootRepackage {
+    mainClass = "com.ziniu.Application"
 }

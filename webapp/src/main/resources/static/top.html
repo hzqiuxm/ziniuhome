@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <title>课程列表</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #f8f8f8;
+            font-family: "微软雅黑 Light";
+            overflow: hidden;
+        }
+        .top-div{background-color: #48525e;width: 100%;height: 40px;color: #f8f8f8;}
+        .top-div img{height: 40px;margin: 0 12px;background-color: white;}
+        .top-right{float: right;}
+        .top-right-user{float: right;color: #f8f8f8;margin: 10px;}
+        .logout-img{float: right;}
+    </style>
+</head>
+<body onload="loadUserInfo()">
+    <div class="top-div">
+        <img src="/favicon.ico">
+        <div class="top-right">
+            <img class="logout-img"  src="/user/img/logout.png" alt="退出" onclick="logout()">
+            <div class="top-right-user"><a class="top-right-user-login" href="/index.html">请登录</a></div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
+<script  type="text/javascript" src="/commons.js"></script>
+<script type="text/javascript" >
+    function loadUserInfo(){
+        $.ajax({
+            type: 'GET',
+            url:  '/user/getCurUser',
+            cache : false,
+            dataType: 'json',
+            async:false,
+            timeout:3000,
+            success: function (result) {
+                if (!result.success){
+                    alert(result.msg);
+                }
+                if(result.data){
+                    $(".top-right-user").html(result.data.showName);
+                    localStorage.setItem("loginName", result.data.loginName);
+                    localStorage.setItem("showName", result.data.showName);
+                }else {
+                    localStorage.removeItem("loginName");
+                    localStorage.removeItem("showName");
+                    $(".logout-img").hide();
+                }
+            },
+            error:function(){
+                alert("error!!!!");
+            }
+        });
+    }
+
+    function logout() {
+        location.href="/logout"
+    }
+</script>
+</html>

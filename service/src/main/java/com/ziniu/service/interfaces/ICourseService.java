@@ -35,13 +35,20 @@ public interface ICourseService extends BaseService {
      * @return
      */
     List<Course> getCourseListByLecturerOrStage(String lecturer, byte stage);
+    /**
+     * 根据讲师或指定状态获取包含报名信息的课程列表
+     * @param lecturer
+     * @param stage
+     * @return
+     */
+    List<CourseSignup> getCourseSignupListByLecturerOrStage(String lecturer, byte stage);
 
     /**
      * 批量设置课程主键
      * @param list
      * @return
      */
-    ModelMap setKeys(List<Course> list);
+    ModelMap setKeys(List<? extends Course> list);
 
     /**
      * 上传封面

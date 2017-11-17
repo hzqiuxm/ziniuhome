@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 /**
  * Created by yeoman on 2017/11/6.
  */
-@Document(collection = "User")
+@Document(collection = "user")
 public class UserInfo extends User {
     protected String cellNum;
     protected byte sex;

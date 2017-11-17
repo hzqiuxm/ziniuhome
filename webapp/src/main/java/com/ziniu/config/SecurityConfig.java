@@ -15,6 +15,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
+/**
+ * Copyright © 2017年 ziniuxiaozhu. All rights reserved.
+ *
+ * @author shengwuyou
+ * @data 2017/11/16 0015 10：55
+ */
+
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(jsr250Enabled = true) //http://www.mamicode.com/info-detail-1150834.html
@@ -50,13 +59,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .antMatchers("/templates/**").permitAll()
-                .antMatchers("/course/**").permitAll()
-                .antMatchers("/login/view").permitAll()
                 .anyRequest().authenticated()
              .and()
                 .formLogin()
-                    .loginPage("/login/view").permitAll()
+                    .loginPage("/index.html").permitAll()
                     .loginProcessingUrl("/loginProcess")   //自定义的一个登陆验证地址，controller中没有对应的方法，只是为了login过滤
                     .usernameParameter("loginName")
                     .passwordParameter("password")
@@ -79,12 +85,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     public void configure(WebSecurity web) throws Exception {
         //因为boot 默认的静态资源位置就是在resource/static目录下面 ,这里我做一个测试
-        web.ignoring().antMatchers("/views/**/*.html",
-                                                "/register",
+        web.ignoring().antMatchers("/user/register",
                                                 "/login/getToken",
+                                                "/**/*.html",
                                                 "/**/*.ico",
                                                 "/**/*.jpg",
                                                 "/**/*.js",
+                                                "/**/*.png",
                                                 "/**/*.css"
         );
     }

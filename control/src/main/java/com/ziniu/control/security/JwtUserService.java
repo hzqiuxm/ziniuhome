@@ -7,11 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-//@Service
+/**
+ * Copyright © 2017年 ziniuxiaozhu. All rights reserved.
+ *
+ * @author shengwuyou
+ * @data 2017/11/15 0015 14:17
+ */
+
 public class JwtUserService implements UserDetailsService{
 
     @Autowired
-    private UserInfoRepository userInfoRepository;
+    UserInfoRepository userInfoRepository;
 
     @Override
     public JwtUserBase loadUserByUsername(String username) throws UsernameNotFoundException {

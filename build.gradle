@@ -1,4 +1,15 @@
-buildscript{
+plugins{
+    id 'org.springframework.boot' version '1.5.8.RELEASE'
+}
+
+allprojects{
+    group = 'com.znxz'
+    version = '1.0'
+
+    apply plugin: 'org.springframework.boot'
+}
+
+subprojects{
     apply plugin: 'java'
     apply plugin: 'idea'
 
@@ -20,44 +31,4 @@ buildscript{
         mavenCentral()
         jcenter()
     }
-
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin")
-        /*这个是本地开发时用来支持热部署的，上开发/测试/生产环境时，建议注释掉，以免影响性能。*/
-        classpath ("org.springframework:springloaded:${springloadedVersion}")
-    }
-}
-
-plugins{
-    id 'org.springframework.boot' version '1.5.8.RELEASE'
-}
-
-
-allprojects{
-    group = 'com.znxz'
-    version = '1.0'
-
-    apply plugin: 'org.springframework.boot'
-}
-
-subprojects{
-    repositories {
-        mavenLocal()
-        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public' }
-        maven{ url 'http://www.ziniuxiaozhu.com:8081/nexus/content/groups/public' }
-        mavenCentral()
-        jcenter()
-    }
-}
-
-jar {
-    baseName = "znxz"
-}
-
-bootRun {
-    addResources = true
-    main = "com.ziniu.Application"
-}
-bootRepackage {
-    mainClass = "com.ziniu.Application"
 }

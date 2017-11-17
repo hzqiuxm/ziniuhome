@@ -23,7 +23,7 @@ function publish() {
 function getCourseList(){
     $.ajax({
         type: "GET",
-        url: "/course/getList",
+        url: "/course/getCourseSignups",
         success: function (result) {
             if (!result.success){
                 alert(result.msg);
@@ -39,21 +39,35 @@ function showCards(courses) {
         courseList[id] = courses[id];
         var cardNode = $("#card").clone();
         $(cardNode).attr("id", id);
-        $(cardNode).addClass("card");
-        $(cardNode).children().first().html(setStage(id));
-        $(cardNode).find("div").first().attr("data", id);
-        $(cardNode).find("p[name=lecturerName]").first().html(courses[id].lecturerName);
-        $(cardNode).find("p[name=title]").first().html(courses[id].title);
+        $(cardNode).children().first().html(courses[id].title);
+        var pNodes = $(cardNode).find(".card-info").children();
+        $(pNodes).first().html(courses[id].lecturerName);
+        $(pNodes).get(1).innerHTML = setStage(id);
+        var loginName = "haosj";
+        if(loginName != courseList[id].lecturere && courseList[id].signups){
+            var signuped = false;
+            for(var u in courseList[id].signups){
+                if(loginName == courseList[id].signups[u].loginName) {
+                    signuped = true;
+                }
+            }
+            if(signuped){
+                $(pNodes).last().html("已报名");
+            }else {
+                $(pNodes).last().html("<input type=\"button\" onclick=\"signup('"+id+"')\" value=\"报名\">");
+            }
+        }
+        var coverNode = $(cardNode).find(".card-cover").first();
         if (courses[id].cover){
-            $(cardNode).css("background", 'url('+courses[id].cover.url+'?v='+new Date().getTime()+')no-repeat center');
-            $(cardNode).addClass("card-img-have");
+            $(coverNode).css("background", 'url('+courses[id].cover.url+'?v='+new Date().getTime()+')no-repeat center');
+            //$(cardNode).addClass("card-img-have");
         }else{
-            $(cardNode).css("background", 'url(/favicon.ico)no-repeat center');
+            $(coverNode).css("background", 'url(/favicon.ico)no-repeat center');
         }
         $(cardNode).css("display", "block");
-        var liNode = document.createElement("li");
-        $("#list").append(liNode);
-        $(liNode).append(cardNode);
+        //var liNode = document.createElement("li");
+        $("#list").append(cardNode);
+        //$(liNode).append(cardNode);
         $(cardNode).click(function () {
             showUpdateBox($(this).attr("id"));
         });
@@ -114,10 +128,26 @@ function setStage(id) {
         case 1: return "审核中";
         case 2: return "已滞留";
         case 3:
-            var html = ziniu.commons.dateFmt("yyyy-MM-dd hh:mm", new Date(courseList[id].gmtLecture));
-            //if (courseList[id].lecturere)//等拿到用户登录名才行
-            return ziniu.commons.dateFmt("yyyy-MM-dd hh:mm", new Date(courseList[id].gmtLecture))
-                + "<input type=\"button\" onclick=\"signup('"+id+"')\" value=\"报名\">";
+            //var html = ziniu.commons.dateFmt("yyyy-MM-dd hh:mm", new Date(courseList[id].gmtLecture));
+            ////if (courseList[id].lecturere)//等拿到用户登录名才行
+            ////if(localStorage.user && localStorage.user.loginName != courseList[id].lecturere
+            //var loginName = "haosj";
+            //if(loginName != courseList[id].lecturere && courseList[id].signups){
+            //    var signuped = false;
+            //    for(var user in courseList[id].signups){
+            //        //if(localStorage.user.loginName == courseList[id].signups.loginName)
+            //        if(loginName == courseList[id].signups.loginName)
+            //            signuped = true;
+            //    }
+            //    if(signuped){
+            //        html += "<span>已报名</span>";
+            //    }else {
+            //        html += "<input type=\"button\" onclick=\"signup('"+id+"')\" value=\"报名\">";
+            //    }
+            //}
+            return ziniu.commons.dateFmt("yyyy-MM-dd hh:mm", new Date(courseList[id].gmtLecture));
+            //return ziniu.commons.dateFmt("yyyy-MM-dd hh:mm", new Date(courseList[id].gmtLecture))
+            //    + "<input type=\"button\" onclick=\"signup('"+id+"')\" value=\"报名\">";
         case 4: return "已闭课";
         case 5: return "进行中";
         case 6: return "已完成";

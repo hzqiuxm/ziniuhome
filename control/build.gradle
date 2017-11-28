@@ -3,12 +3,11 @@ project(':control'){
     dependencies{
         compile project(':service')
         //WEB服务
-        compile("org.springframework.boot:spring-boot-starter-web")
+        compile("org.springframework.boot:spring-boot-starter-data-rest")
 
-        //这里我是用tomcat容器提供servlet
-        //compile("org.apache.tomcat.embed:tomcat-embed-jasper:${springBootVersion}")
-        //compile("javax.servlet:javax.servlet-api:${springBootVersion}")
-        //compile("javax.servlet:jstl:${springBootVersion}")
+        //JWT
         compile("io.jsonwebtoken:jjwt:0.9.0")
+        //SpringSecurity
+        compile("org.springframework.boot:spring-boot-starter-security")
     }
 }

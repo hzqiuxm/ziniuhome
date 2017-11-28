@@ -11,22 +11,24 @@
 - *用户相关信息，包括用户信息和角色。*
 ```
 user {
-    "id" : ObjectId //主键ID
+    "id" : String //主键ID，自动生成
     "loginName" : String(32) //登录用户名
     "showName" : String(32) //显示的用户名称
-    "cellNum" : String(16) //通讯号码
     "passwd" : String(64) //登录密码
-    "sex" : Byte(1) //性别
-    "age" : Integer //年龄
-    "stage" : Byte(1) //状态
-    "rank" : String(16) //职级(段位)
+    "stage" : byte(1) //状态
     "roles" : List<String> //角色列表
-    "jc" : Integer //节操
+    "sex" : byte(1) //性别
+    "age" : int //年龄
+    "rank" : String(16) //职级(段位)
+    "cellNum" : String(16) //通讯号码
+    "jc" : int //节操
+    "email" : String(64) //电子邮箱
     "avatar" : Res {
             "bucket" : String(32) //储存空间
             "fileKey" : String(64) //文件key
             "url" : String(128) //外连URL
         }
+    "gmtCreate" : Date //创建时间
     "gmtModify" : Date //修改时间
 }
 ```
@@ -36,12 +38,12 @@ user {
 config {
     "code" : String(64) //配置编码，主键
     "name" : String(64) //配置名称
-    "type" : Byte(1) //类型，默认为0
-    "stage" : Byte(1) //有效状态：0为使用中，1为已弃用，2为保留。
+    "type" : byte(1) //类型，默认为0
+    "stage" : byte(1) //有效状态：0为使用中，1为已弃用，2为保留。
     "descrip" : String(32) //配置值说明
-    "byteVar" : Byte(2) //1~2位数值型数据
-    "intVar" : Integer //1~9位数值型数据
-    "longVar" : Long(18) //10~18位数值型数据
+    "byteVar" : byte(2) //1~2位数值型数据
+    "intVar" : int //1~9位数值型数据
+    "longVar" : long(18) //10~18位数值型数据
     "strVar" : String(64) //短字符串型数据
     "str1024Var" : String(1024) //长字符串型数据
     "gmtModify" : Date //修改时间
@@ -51,11 +53,11 @@ config {
 - *节操流水，记录节操流通信息*
 ```
 jcRec {
-    "id" : ObjectId //主键ID
+    "id" : String //主键ID，自动生成
     "outer" : String(32) //节操流出方的loginName
-    "amount" : Integer //数量
+    "amount" : int //数量
     "iner" : String(32) //节操流入方的loginName
-    "type" : Byte(1) //类型，系统发放为0，系统奖励为1，系统返还为2，用户打赏为5，其他用户消耗为6
+    "type" : byte(1) //类型，系统发放为0，系统奖励为1，系统返还为2，用户打赏为5，其他用户消耗为6
     "descrip" : String(32) //说明
 }
 ```
@@ -63,7 +65,7 @@ jcRec {
 - *课程相关信息，包括课程资源信息。*
 ```
 course {
-    "id" : ObjectId //主键ID
+    "id" : String //主键ID
     "title" : String(32) //主题
     "descrip" : String(128) //课程介绍
     "lecturer" : String(32) //讲师的loginName
@@ -71,13 +73,13 @@ course {
     "audience" : String(32) //受众描述
     "gmtLecture" : Date //开讲时间
     "addr" : String(128) //讲课地点
-    "stage" : Byte(1) //课程阶段：0为发布，1为审核，2为保留，3为报名，4为闭课，5为开课，6为结课，7为公开。
+    "stage" : byte(1) //课程阶段：0为发布，1为审核，2为保留，3为报名，4为闭课，5为开课，6为结课，7为公开。
     "ruleCode" : String(64) //规则编码
     "signups" : List<Signup> [ //报名列表
             {
                 "loginName" : String(32) //登录用户名
                 "showName" : String(32) //显示的用户名称
-                "rewardCnt" : Integer //赞赏次数，大于0的最长不超过4位的纯数字
+                "rewardCnt" : int //赞赏次数，大于0的最长不超过4位的纯数字
                 "gmtSignup" : Date //报名时间
             }
         ]
@@ -90,31 +92,31 @@ course {
             "bucket" : String(32) //储存空间
             "fileKey" : String(64) //文件key
             "url" : String(128) //外连URL
-            "fsize" : Integer //文件大小，单位为B字节
-            "downCnt" : Integer //下载次数
+            "fsize" : int //文件大小，单位为B字节
+            "downCnt" : int //下载次数
         }
     "speech" : DownableRes { //课程文稿
             "bucket" : String(32) //储存空间
             "fileKey" : String(64) //文件key
             "url" : String(128) //外连URL
-            "fsize" : Integer //文件大小，单位为B字节
-            "downCnt" : Integer //下载次数
+            "fsize" : int //文件大小，单位为B字节
+            "downCnt" : int //下载次数
         }
     "audio" : PlayableRes { //演讲音频
             "bucket" : String(32) //储存空间
             "fileKey" : String(64) //文件key
             "url" : String(128) //外连URL
-            "fsize" : Integer //文件大小，单位为B字节
-            "playCnt" : Integer //播放次数
-            "downCnt" : Integer //下载次数
+            "fsize" : int //文件大小，单位为B字节
+            "playCnt" : int //播放次数
+            "downCnt" : int //下载次数
         }
     "video" : PlayableRes { //演讲视频
             "bucket" : String(32) //储存空间
             "fileKey" : String(64) //文件key
             "url" : String(128) //外连URL
-            "fsize" : Integer //文件大小，单位为B字节
-            "playCnt" : Integer //播放次数
-            "downCnt" : Integer //下载次数
+            "fsize" : int //文件大小，单位为B字节
+            "playCnt" : int //播放次数
+            "downCnt" : int //下载次数
         }
     "gmtModify" : Date //修改时间
 }
@@ -123,11 +125,11 @@ course {
 - *课程评论相关信息，包括评论课程的用户、评论、被赞父评论ID等信息。*
 ```
 courseCmt {
-    "id" : ObjectId //主键ID
-    "courseId" : Long(11) //课程ID
+    "id" : String //主键ID，自动生成
+    "courseId" : String //课程ID
     "loginName" : String(32) //登录用户名
     "showName" : String(32) //显示的用户名称
-    "cmtPid" : ObjectId //回复的评论的ID
+    "cmtPid" : String //回复的评论的ID
     "likes" : List<String> [ //点赞的用户
             "loginName" : String(32) //登录用户名
         ]
@@ -152,28 +154,46 @@ courseCmt {
 ### 后端
  - 实体对象类都要加Document注解，子类与父类共用同一集合的，子类需要使用collection指定集合名
  - 持久层接口统一从MongoRepository接口继承，其中自定义的方法请遵循Mongodb约定命名
- - 服务层接口建议继承BaseService接口，实现对返回的数据进行封装，以ModelMap类型返回，设置对象主键为key，对象为value
  - 服务层也要做必要的校验和异常处理，以及格式化日志输出
  - 控制层接口建议继承BaseController类，返回数据请调用BaseController类中封装的方法
  - Http接口非特殊不返回页面，统一返回JSON格式的数据，并按下一条规范进行封装
  - 返回数据封装字段：success、code、msg、data，返回失败时，无数据data可以省略
+ - 对于MongoDB集合数据，主键ID为ObjectId类型时，请使用BaseController中setKey或setKeys方法，对返回的数据进行封装，以ModelMap类型返回，设置对象主键为key，对象为value
  - 日志输出建议使用log，统一使用slf4j的标准包
 ### 前端
  - Html页面统一放在/resources/static目录下，并且按功能或模块分子目录
  - Js和Css等统一放在/resources/public目录下，并且按功能或模块分子目录
  - 对静态资源的引用统一使用项目根路径
  - 统一使用Ajax请求后端接口
- 
+ - 一些通用和方法和token管理相关的方法都在/js/commons.js中进行了封装，建议引用
 ---
 
-###  security过滤框架的使用注意點：
+## 权限控制说明
+ - 已经集成了Jwt和SpringSecurity实现了登录和权限的控制，并对前端管理token也进行了js封装。
 
-####  书写前端页面时候的注意点 
-  -  每个AJAX请求需要带上token,token放置在请求头中 这里我设置一个全局事件，在ajax启动的时候自动触发
-  
-####  书写后端的注意点 
-  -  后端写接口的时候控制访问的权限，通过注解的方式 (例子：@RolesAllowed（{"ROLE_NAME"}）  @PermitAll   @DenyAll   )
-  
+### 接口权限：
+ - 在controller中可以对整个类或者指定方法进行权限的控制，配置方法如下：
+ ```java
+@RestController
+@PreAuthorize("hasRole('ADMIN')")
+public class CourseReviewController extends BaseController {
+    
+}
+```
+```java
+@RestController
+@RequestMapping("/course")
+public class CourseController extends BaseController {
+    
+    @PostMapping("/signup")
+    @PreAuthorize("hasRole('USER')")
+    public ModelMap signup(String id) {
+    
+    }
+}
+```
+---
+
 ##### 编码规约
 - 所有的人都要设置文件头，格式如下：
 ```

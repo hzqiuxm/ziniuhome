@@ -2,78 +2,159 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LOGIN</title>
-    <link rel="stylesheet" type="text/css" href="/user/css/login/login.css"/>
-    <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript">
-        var token = null;
-        function ajaxSubmit(){
-            var userInfo={
-                'loginName':$("*[name='loginName']").val(),
-                'password':$("*[name='password']").val()
-            };
-            $.ajax({
-                type: "post",
-                url: "/login/getToken",
-                dataType: "JSON",
-                data: userInfo,
-                async: true,
-                success:function(data, textStatus, jqXHR){
-                    console.log(jqXHR.getAllResponseHeaders());
-                    if(data.code.toString() == 200){
-                        token = jqXHR.getResponseHeader("token");
-                        if(token == null){
-                            alert("系统异常，token生成失败，重新登陆！");
-                            return;
-                        }else{
-                            localStorage.setItem("token",token)  //本地存储token的值
-                        }
-                        window.location.href="/course/courseList.html";
-                    }
-                },
-                error:function (XMLHttpRequest, textStatus, errorThrown){
-                    console.log(XMLHttpRequest.getAllResponseHeaders());
-                    if(textStatus=="timeout"){
-                        alert("响应超时，请稍后重试");
-                    }else{
-                        alert("用户名或者密码错误！");
-                    }
-                }
-            });
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <title>紫牛小筑</title>
+    <link rel="stylesheet" type="text/css" href="/css/top.css"/>
+    <style>
+        body {
+            margin: 0 auto;
+            padding: 5px;
+            background-color: #f8f8f8;
+            font-family: "微软雅黑 Light";
+            max-width: 1056px;
         }
-        function func(token) {
-            $.ajax({
-                type: 'GET',
-                url:  '/test',
-                beforeSend : function (xhr) {
-                    xhr.setRequestHeader("Authorization","Bearer"+token)
-                },
-                cache : false,
-                dataType: 'html',
-                data: {},
-                success:function( data,status,xhr ){
-                    console.log(xhr.getAllResponseHeaders());
-                },
-                error:function(){
-                    alert("error!!!!");
-                }
-            });
-        }
-    </script>
+        iframe{width: 100%;height: 40px;margin: 0;border: 0;}
+        h1{font-size: 46px;text-align: center;}
+        div{text-indent: 54px;}
+        p{font-size: 26px;}
+    </style>
 </head>
 <body>
-<a id="register" href="/register.html" >REGISTER</a>
-<span class="login_form"  id="loginForm">
-    <div class="content">
-        <p2><div id="header" >SIGN IN</div></p2>
-        <div id="d1" >loginName<a id="a1">： <input type="text" name="loginName"></a></div>
-        <div id="d2" >password<a id="a2">： <input type="password" name="password" > </a></div>
-        <div id="d3" >
-            <button id="b1" onclick="ajaxSubmit()">LOGIN</button>
-            <button id="b2" type="reset">RESET</button>
+<div class="top-div"></div>
+<h1>紫牛小筑技术栈</h1>
+<hr>
+<div>
+    <p>
+        对于程序员，网络上有无数黑段子，什么“一百位程序员只有一种样子”，“话少钱多死得早，毫无情趣女友跑”等等。这一个个的段子，伤了多少程序员的心。
+    </p>
+    <p>
+        一开始，对这种现象，我也无法反驳，因为我悲哀的发现，现实生活中，好多程序员确实是这个样子的。但是最近，当我看到程序员Kenneth Retiz的事迹，我突然间就想为程序员们平反，其他人我不管，但是程序员们不能够再任凭他人再给我们下定义了，我们要关注生活，让自己成为一个大家都喜欢的潜力股。
+    </p>
+    <p>
+        也许还有很多人不知道Kenneth Retiz是谁，这里我不得不先科普一下了，首先，Kenneth Retiz是一位大师级程序员，是云服务鼻祖HeroKu公司Python语言的总架构师，在github上的排名为世界前五，被称为代码界的facebook.其次，他还会摄影，其摄影作品极为出色。甚至，他还是一位音乐制作人。
+    </p>
+    <p>
+        连这么优秀的程序员的都这么拼，这么热爱生活，作为普通程序员的我们，难道不应该像他学习吗？不试试看从没做过的东西，怎么遇见另一个自己？
+    </p>
+    <p>
+        大的不敢说，我们可以从为自己培养一样文艺的爱好开始做起，慢慢改变自己。
+    </p>
+    <p>
+        <b>
+            01-
+        </b>
+    </p>
+    <p>
+        <b>
+            为自己培养一种文艺的爱好，对程序员的职业生涯发展是有好处的
+        </b>
+        。
+    </p>
+    <p>
+        假如一个程序员只懂技术，不懂社交，不懂说话，不懂写作，不懂分享，那它充其量也只能算是一架代码机器，这对程序员的职业生涯来说是非常不利的。曾经在网上看过很多大神们的分享，我惊奇的发现一件事，大牛之所以会成为大牛，往往并不是因为他们总在技术上高人一等，而是他们除了技术之外，还有其他方面比他人突出。比如更会做PPT，更会说话，更会分享，更会写作。而为自己培养一种文艺的爱好，其实正是踏出这一步的开始，当你有了爱好，并坚持下去，你会逐渐遇到有同种喜好的人，交际圈会扩大，心胸会开阔，你会变得开朗，生活也会变得更加明媚起来。
+        <br>
+    </p>
+    <p>
+        <br>
+    </p>
+    <div class="image-package">
+        <img src="http://upload-images.jianshu.io/upload_images/1997371-e20ae64f496e4e3d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+             style="cursor: zoom-in;">
+        <br>
+        <div class="image-caption">
         </div>
     </div>
-</span>
+    <p>
+        <b>
+            02-
+        </b>
+    </p>
+    <p>
+        <b>
+            为自己培养一种文艺的爱好，能够让程序员的生活变得多彩
+        </b>
+        。
+    </p>
+    <p>
+        总所周知，相对其他职业，由于程序员总是和机器打交道，说话的机会在其日常工作中是比较少的，也就会比较枯燥。而试着为自己培养一种文艺的爱好，写作，摄影，弹吉他，旅行，不仅能够陶冶情操，还可以排解下整天改bug时烦躁的心，让自己心静。在写作中，我们可以总结思考，记录一天的美好。在摄影中，我们可以随心所欲，留下每一点感动。在弹吉他中，我们可以享受音乐的美好，放松心情。而在旅行中，我们可以见识到不同的人群与习俗，开阔眼界。
+    </p>
+    <div class="image-package">
+        <img src="http://upload-images.jianshu.io/upload_images/1997371-6fb506ed4e91d0a5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+             style="cursor: zoom-in;">
+        <br>
+        <div class="image-caption">
+        </div>
+    </div>
+    <p>
+        <b>
+            03-
+        </b>
+    </p>
+    <p>
+        <b>
+            为自己培养一种文艺的爱好，能够让程序猿走出邋遢，变得帅气。
+        </b>
+    </p>
+    <p>
+        现代社会，作为互联网重要组成部分的程序猿，早就被贴上了无数的标签。码农，搬砖者，单身狗，钱多话少死的早等等。而格子衬衫，大裤衩，人字拖，基本成了众人眼中程序猿的标配。但是，我觉得程序猿不能任由其他人给我们下定义。我们应该做自己，让自己更加变帅气一些。而放下代码，带着相机走上街头的程序猿，拿起吉他的程序猿，无疑会比坐在电脑前的程序猿更加引人注目。
+    </p>
+    <div class="image-package">
+        <img src="http://upload-images.jianshu.io/upload_images/1997371-8eff5207281c06cd.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+             style="cursor: zoom-in;">
+        <br>
+        <div class="image-caption">
+        </div>
+    </div>
+    <p>
+        <b>
+            04-
+        </b>
+    </p>
+    <p>
+        <b>
+            为自己培养一种文艺的爱好，也许可以为程序员解决终身大事
+        </b>
+        。
+    </p>
+    <p>
+        程序猿所在的软件开发行业，妹子的数量真可谓是凤毛麟角啊。在这样一个粥少僧多的大环境下，程序猿们如果还不主动出击，就真的活该单身一辈子喽。而培养一种文艺的爱好，会提高你遇到和被妹子喜欢的几率。
+    </p>
+    <div class="image-package">
+        <img src="http://upload-images.jianshu.io/upload_images/1997371-99eea280dfbc69a3.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+             style="cursor: zoom-in;">
+        <br>
+        <div class="image-caption">
+        </div>
+    </div>
+    <p>
+        <b>
+            05-
+        </b>
+    </p>
+    <p>
+        <b>
+            为自己培养一种文艺的爱好，程序猿就为自己选择了另一种生活方式
+        </b>
+        <b>
+            。
+        </b>
+    </p>
+    <p>
+        程序猿所在的互联网行业，其高节奏，快发展，大变化，是无需多言的。特别是在一线城市中生活的各位猿们，每天早上醒来就去上班，很晚下班后回到家可能还要学习，或者继续调bug，然后睡觉。在这种情况下，时间流逝是极为迅速的，很多人不知不觉间就从弱冠少年走到了而立青年，却很少有机会停下来，抬头望望天空。而为自己培养一种文艺的爱好，就等于人为的让自己的快生活慢下来，让自己能够更好的享受生活。毕竟，我们之所以努力工作，不是为了工作，不是为了钱，而只是为了更好的生活罢了。
+    </p>
+    <div class="image-package">
+        <img src="http://upload-images.jianshu.io/upload_images/1997371-1b5cae241c28ddff.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+             style="cursor: zoom-in;">
+        <br>
+        <div class="image-caption">
+        </div>
+    </div>
+    <p>
+        最后，如果将生活方式比做衣服，那文艺绝对是程序猿们穿得起的牌子，所以，不妨在打代码之余好好为自己培养一项文艺的爱好，没准，会遇到不一样的自己哦。
+    </p>
+</div>
 </body>
+<script type="text/javascript" src="/plugins/jquery-3.2.1.min.js"></script>
+<script  type="text/javascript" src="/js/commons.js"></script>
 </html>

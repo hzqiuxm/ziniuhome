@@ -5,38 +5,33 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <title>课程列表</title>
-    <link rel="stylesheet" type="text/css" href="/css/top.css"/>
     <style>
         body {
             margin: 0 auto;
             padding: 5px;
             background-color: #f8f8f8;
             font-family: "微软雅黑 Light";
-            max-width: 1056px;
+            max-width: 960px;
         }
-        iframe{width: 100%;height: 40px;margin: 0;border: 0;}
         a {
             float: right;margin: auto auto auto 26px;
         }
         hr {width: 100%;}
-        ul {margin: 0;padding: 0; list-style: none;}
-        #list li {float: left; margin: 4px;}
+        ul {padding: 0; list-style: none;}
+        #list li {float: left; margin: 8px;}
+        #card {display: none;}
         .card {
-            display: none;
             border: 1px solid #666666;
-            width: 342px;
+            width: 442px;
             height: 198px;
             color: #FF9B00;
-            background-color: #f4f4f4;
-            padding: 0;
+            background-color: #E0E0E0;
+            padding: 10px;
+            background-size: contain !important;
         }
-        .card-title {background-color: blanchedalmond;padding: 8px;}
-        .card-info {float: left;padding: 0 8px;width: 25%;height: 160px;}
-        .card-cover {background-size: contain !important;display: block;width: 70%;float: right;height: 160px;padding: 0;}
         .card p {height: 13%;}
-        /*.card input {margin-right: 8px; float: right;z-index: 999;}*/
-        .card input {margin: inherit;z-index: 999;}
-        /*.card div {height: 28%;}*/
+        .card input {margin-right: 8px; float: right;z-index: 999;}
+        .card div {height: 28%;}
         #pubBox,#updateBox {
             display: none;
             position: fixed;
@@ -71,7 +66,6 @@
     </style>
 </head>
 <body>
-    <div class="top-div"></div>
     <div>
         <span>课程列表</span>
         <a href="/course/courseReviewList.html" target="_blank">审核课程</a>
@@ -79,15 +73,12 @@
     </div>
     <hr>
     <ul id="list"></ul>
-    <li id="card" class="card">
-        <div class="card-title"></div>
-        <div class="card-info">
-            <p></p>
-            <p></p>
-            <p></p>
-        </div>
-        <div class="card-cover"></div>
-    </li>
+    <div id="card">
+        <p>发布中</p>
+        <div data=""></div>
+        <p name="lecturerName"></p>
+        <p name="title"></p>
+    </div>
     <div id="pubBox">
         <span>发布课程</span>
         <hr>
@@ -118,9 +109,10 @@
         <a href="javascript:closeBox()">取消</a>
     </div>
 </body>
-<script src="/plugins/jquery-3.2.1.min.js" type="text/javascript"></script>
-<script src="/js/commons.js" type="text/javascript"></script>
-<script src="/js/course/course.js" type="text/javascript"></script>
+<script src="/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="/commons.js" type="text/javascript"></script>
+<script src="/course/course.js" type="text/javascript"></script>
+<script src="/ajaxUtil.js" type="text/javascript"></script>
 <script type="text/javascript">
 
 </script>

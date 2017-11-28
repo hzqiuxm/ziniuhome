@@ -4,13 +4,13 @@ import com.ziniu.data.entity.Course;
 import com.ziniu.service.interfaces.ICourseService;
 import com.ziziu.common.Const;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.Date;
 
 /**
@@ -18,6 +18,7 @@ import java.util.Date;
  * Created by yeoman on 2017/10/31.
  */
 @RestController
+@PreAuthorize("hasRole('ADMIN')")
 public class CourseReviewController extends BaseController {
 
     @Autowired
@@ -28,7 +29,6 @@ public class CourseReviewController extends BaseController {
      * @return
      */
     @GetMapping("/course/reviewList")
-    @RolesAllowed({"ROLE_ADMIN"})
     public ModelMap reviewList(){
         return getSuccessResult(courseService.setKeys(courseService.getReviewList()));
     }
@@ -42,7 +42,6 @@ public class CourseReviewController extends BaseController {
      * @return
      */
     @PostMapping("/course/review")
-    @RolesAllowed({"ROLE_ADMIN"})
     public ModelMap review(String id, Byte stage, Long gmtLecture, String addr) {
         if (StringUtils.isEmpty(id) || null == stage
                 || (stage != Const.CourseStage.STAY && stage != Const.CourseStage.SIGNUP)){

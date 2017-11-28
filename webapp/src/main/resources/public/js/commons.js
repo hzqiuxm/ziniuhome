@@ -45,11 +45,46 @@ ziniu.commons = {
             +(dateStr[2].length>1?dateStr[2]:("0"+dateStr[2])));
         var timeStr = gmtLecture.toTimeString().split(":");
         lectureTime.setAttribute("value", timeStr[0]+":"+timeStr[1]);
-    }
+    },
+    topHtml: "<img class='top-favicon' src='/imgs/favicon.ico' onclick='window.parent.location=\"/index.html\"'>\n" +
+    "<div class='top-left'>\n" +
+    "    <a id='top2Course' href='/course/courseIntroduce.html' target='_parent'>课程系统</a>\n" +
+    "</div>\n" +
+    "<div class='top-right'>\n" +
+    "    <img class='logout-img'  src='/imgs/top/logout.png' alt='退出' onclick='logout()'>\n" +
+    "    <div class='top-right-user'><a class='top-right-user-login' href='/login.html'>请登录</a></div>\n" +
+    "</div>"
 };
 //设置全局事件
 $.ajaxSetup({
-    beforeSend:function(XMLHttpRequest){
-        XMLHttpRequest.setRequestHeader("Authorization","Bearer"+localStorage.getItem("token"));
+    contentType:"application/x-www-form-urlencoded;charset=utf-8",
+    cache:false
+});
+$(document).ajaxSend(function(event, xhr, opts) {
+    if(sessionStorage.getItem("token") && Date.now() <= sessionStorage.getItem("expiration")){
+        xhr.setRequestHeader("token", sessionStorage.getItem("token"));
+    }
+}).ajaxSuccess(function(event, xhr, opts) {
+    if(xhr.getResponseHeader("token")){
+        sessionStorage.setItem("token", xhr.getResponseHeader("token"));
+    }
+    if(xhr.getResponseHeader("expiration")){
+        var expiration = Number(xhr.getResponseHeader("expiration"));
+        //设置过期时间的毫秒值
+        sessionStorage.setItem("expiration", Date.now() + expiration);
+    }
+}).ajaxError(function(event, xhr, opts){
+    if(403 === xhr.status){
+        sessionStorage.clear();
     }
 });
+//页面载入事件
+window.onload = function () {
+    $(".top-div").html(ziniu.commons.topHtml);
+    if(sessionStorage.getItem("token")){
+        $(".top-right-user").html(sessionStorage.getItem("showName"));
+        $("#top2Course").attr("href","/course/courseList.html");
+    }else {
+        $(".logout-img").hide();
+    }
+};

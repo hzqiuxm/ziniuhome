@@ -18,7 +18,7 @@ public enum  ZiniuEnum {
     LOGINNAME_NULL(10006,"请输入loginName！"),
     USER_NO_LOGIN(10007,"用户未登录！"),
     USER_ROLE_TOP(10008,"用户已经是最高权限！"),
-    LOGINING_ERROR(10009,"登陆系统异常！")
+    LOGINING_ERROR(10009,"系统异常！")
     ;
 
     private int key;

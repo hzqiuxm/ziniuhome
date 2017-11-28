@@ -12,9 +12,6 @@ project(':common'){
         testCompile("org.springframework.boot:spring-boot-starter-test")
         //七牛云SDK
         compile("com.qiniu:qiniu-java-sdk:7.2.8")
-        //阿里的JSON
-        compile('com.alibaba:fastjson:1.1.15')
-
 
         //Encrypt配置文件密码加密
         compile("com.github.ulisesbocchio:jasypt-spring-boot-starter:1.15")

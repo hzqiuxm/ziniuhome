@@ -1,15 +1,17 @@
 package com.ziniu.control;
 
-import com.ziniu.control.security.JwtUserBase;
+import com.ziniu.control.security.JwtUser;
 import com.ziniu.data.entity.User;
 import com.ziziu.common.Const;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
 
+import java.util.List;
+
 /**
  * Created by yeoman on 2017/10/19.
  */
-public class BaseController {
+public class BaseController<T> {
 
     public static final String SUCCESS = "success";
     public static final String CODE = "code";
@@ -21,12 +23,11 @@ public class BaseController {
      * @return
      */
     String getLoginName(){
-        JwtUserBase userDetails = (JwtUserBase) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        JwtUser userDetails = (JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(userDetails == null){
-            return "未登录";
+            return null;
         }
-        String loginName = userDetails.getLoginName();//测试用，等圣无忧实现
-        return loginName;
+        return userDetails.getLoginName();
     }
 
     /**
@@ -34,20 +35,19 @@ public class BaseController {
      * @return
      */
     String getShowName(){
-        JwtUserBase userDetails = (JwtUserBase) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        JwtUser userDetails = (JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(userDetails == null){
-            return "未登录";
+            return null;
         }
-        String showName =userDetails.getShowName();//测试用，等圣无忧实现
-        return showName;
+        return userDetails.getShowName();
     }
 
     /**
      * 获取当前用户的信息
      * @return
      */
-    User getJwtUserBase(){
-        JwtUserBase jwtUserBase = (JwtUserBase) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User getCurUser(){
+        JwtUser jwtUserBase = (JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(jwtUserBase == null){
             return null;
         }
@@ -103,5 +103,34 @@ public class BaseController {
         ModelMap modelMap = getFailResult(failCode, msg);
         modelMap.put(DATA, data);
         return modelMap;
+    }
+
+    /**
+     * 默认实现的设置对象主键的方法
+     * @param data
+     * @param key
+     * @return
+     */
+    ModelMap setKey(T data, String key){
+        ModelMap map = new ModelMap();
+        map.put(key, data);
+        return map;
+    }
+
+    /**
+     * 默认实现的设置对象列表主键的方法
+     * @param list
+     * @param keys
+     * @return
+     */
+    ModelMap setKeys(List<T> list, List<String> keys){
+        if (list == null || keys == null || (list.size() != keys.size()))
+            return null;
+
+        ModelMap map = new ModelMap();
+        for (int i = 0; i < keys.size(); i++)
+            map.put(keys.get(i), list.get(i));
+
+        return map;
     }
 }

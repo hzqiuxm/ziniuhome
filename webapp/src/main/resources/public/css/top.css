@@ -1,0 +1,11 @@
+.top-div{background-color: #48525e;width: 100%;height: 40px;color: #f8f8f8;}
+.top-favicon{float: left;}
+.top-favicon:hover{cursor: pointer;}
+.top-div img{height: 40px;margin: 0 12px;background-color: white;}
+.top-left{float: left;width: 60%;text-align: center;padding-top: 10px;}
+.top-left a{color: #f4f4f4;font-size: 20px;text-decoration: none;border-bottom: 2px solid;padding: 0 8px;}
+.top-right{float: right;}
+.top-right-user{float: right;color: #f8f8f8;margin: 10px;}
+.top-right-user-login{color: #f8f8f8;}
+.logout-img{float: right;}
+.logout-img:hover{cursor: pointer;}

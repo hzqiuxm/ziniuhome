@@ -11,11 +11,11 @@ import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -71,7 +71,7 @@ public class CourseController extends BaseController {
         }
         Course course = courseService.getCourse(id);
         if(null != course){
-            return getSuccessResult(courseService.setKey(course, course.getId().toString()));
+            return getSuccessResult(setKey(course, course.getId().toString()));
         }
         return getFailResult(Const.ReturnCode.F_301,"未查到课程信息");
     }
@@ -80,8 +80,8 @@ public class CourseController extends BaseController {
      * 获取课程列表
      * @return
      */
-    @RolesAllowed({"ROLE_USER"})
     @GetMapping("/getList")
+    @PreAuthorize("hasRole('USER')")
     public ModelMap getList(){
         return getSuccessResult(courseService.setKeys(courseService
                 .getCourseListByLecturerOrStage(getLoginName(), Const.CourseStage.SIGNUP)));
@@ -91,8 +91,8 @@ public class CourseController extends BaseController {
      * 获取课程列表
      * @return
      */
-    @RolesAllowed({"ROLE_USER"})
     @GetMapping("/getCourseSignups")
+    @PreAuthorize("hasRole('USER')")
     public ModelMap getCourseSignups(){
         return getSuccessResult(courseService.setKeys(courseService
                 .getCourseSignupListByLecturerOrStage(getLoginName(), Const.CourseStage.SIGNUP)));
@@ -162,6 +162,7 @@ public class CourseController extends BaseController {
      * @return
      */
     @PostMapping("/signup")
+    @PreAuthorize("hasRole('USER')")
     public ModelMap signup(String id) {
         if (StringUtils.isEmpty(id)){
             return getFailResult(Const.ReturnCode.F_201, "参数错误");
@@ -194,6 +195,7 @@ public class CourseController extends BaseController {
      * @return
      */
     @GetMapping("/getSignups/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelMap getSignups(@PathVariable String id){
         if (StringUtils.isEmpty(id)){
             return getFailResult(Const.ReturnCode.F_201, "参数错误");

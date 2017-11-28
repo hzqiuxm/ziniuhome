@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LOGIN</title>
+    <link rel="stylesheet" type="text/css" href="/css/login.css"/>
+</head>
+<body>
+    <a id="register" href="/register.html" >REGISTER</a>
+    <span class="login_form"  id="loginForm">
+        <div class="content">
+            <p2><div id="header" >SIGN IN</div></p2>
+            <div id="d1" >loginName<a id="a1">： <input type="text" name="loginName"></a></div>
+            <div id="d2" >password<a id="a2">： <input type="password" name="password" > </a></div>
+            <div id="d3" >
+                <button id="b1" onclick="login()">LOGIN</button>
+                <button id="b2" type="reset">RESET</button>
+            </div>
+        </div>
+    </span>
+</body>
+<script src="/plugins/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="/js/commons.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function login() {
+        $.ajax({
+            type: "POST",
+            url: "/auth/login",
+            data: {"loginName":$("*[name='loginName']").val(),"password":$("*[name='password']").val()},
+            success: function (result) {
+                if (!result.success){
+                    alert(result.msg);
+                }
+                sessionStorage.setItem("loginName", result.data.loginName);
+                sessionStorage.setItem("showName", result.data.showName);
+                window.location.href="/index.html";
+            },
+            dataType: "json"
+        });
+    }
+</script>
+</html>

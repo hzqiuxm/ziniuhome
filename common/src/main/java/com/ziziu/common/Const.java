@@ -25,7 +25,7 @@ public interface Const {
 
         /** 未查到数据 */
         public static final int F_301 = 301;
-        /** 用户已存在 */
+        /**  */
         public static final int F_302 = 302;
         /** 系统保存失败 */
         public static final int F_303 = 303;
@@ -53,6 +53,14 @@ public interface Const {
         public static final byte STAGE_1 = 1;
         /** 保留 */
         public static final byte STAGE_2 = 2;
+    }
+
+    /** 用户权限 */
+    final class UserRoles {
+        /** 普通用户 */
+        public static final String USER = "ROLE_USER";
+        /** 超级管理员 */
+        public static final String ADMIN = "ROLE_ADMIN";
     }
 
     /** 课程阶段 */

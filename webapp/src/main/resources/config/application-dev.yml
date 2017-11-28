@@ -8,18 +8,7 @@ spring:
         host: 139.224.42.42
         port: 27117
         database: znxz
-
-#日志配置
-logging:
-  file: F:/springboot.log
-  level:
-     com.ziniu.webapp : debug
-     com.ziniu.control : debug
-
-jasypt:
-  encryptor:
-    password: ziniu
-
+---
 server:
   port: 8080
   context-path: /
@@ -29,15 +18,22 @@ server:
 #server.ssl.key-password= 123321
 #server.ssl.key-store-type= JKS
 #server.ssl.key-alias= tomcat
-
+---
+#日志配置
+logging:
+  level:
+     com.ziniu.webapp : debug
+     com.ziniu.control : debug
+     #org.springframework.security: debug
+---
+jasypt:
+  encryptor:
+    password: ziniu
+---
 #JWT
 jwt:
-  header: "Authorization"
-  secret: mySecret
-  expiration: 604800
-  tokenHead: "Bearer"
-  route:
-    authentication:
-      path: auth
-      refresh: refresh
-register: "auth/register"
+  header: "token"
+  secret: 5b+r5L2/55So5Y+M5oiq5qON
+  expiration: expiration
+  expirationTime: 5
+  refresh: 1

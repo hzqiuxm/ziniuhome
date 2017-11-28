@@ -15,6 +15,9 @@ spring:
     mvc:
       favicon:
         enabled: false
+    #配置静态资源检索路径
+    resources:
+      static-locations: classpath:/public/,classpath:/static/
 logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%level] [%class:%line] - %m %n"

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by yeoman on 2017/10/26.
  */
-public interface ICourseService extends BaseService {
+public interface ICourseService {
 
     /**
      * 获取基本信息的课程

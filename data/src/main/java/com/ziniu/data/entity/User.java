@@ -1,7 +1,8 @@
 package com.ziniu.data.entity;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -13,19 +14,21 @@ import java.util.List;
 @Document
 public class User {
     @Id
-    protected ObjectId id;
+    protected String id;
+    @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     protected String loginName;
     protected String showName;
-    protected String Password;
+    protected String password;
     protected byte stage;
-    protected List<String> Roles;   //一个用户拥有的角色用一个list数组保存
+    protected List<String> roles;   //一个用户拥有的角色用一个list数组保存
+    protected Date gmtCreate;
     protected Date gmtModfiy;
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         id = id;
     }
 
@@ -46,11 +49,11 @@ public class User {
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     public byte getStage() {
@@ -62,11 +65,19 @@ public class User {
     }
 
     public List<String> getRoles() {
-        return Roles;
+        return roles;
     }
 
     public void setRoles(List<String> roles) {
-        Roles = roles;
+        this.roles = roles;
+    }
+
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 
     public Date getGmtModfiy() {
@@ -83,9 +94,10 @@ public class User {
                 "id=" + id +
                 ", loginName='" + loginName + '\'' +
                 ", showName='" + showName + '\'' +
-                ", Password='" + Password + '\'' +
+                ", password='" + password + '\'' +
                 ", stage=" + stage +
-                ", Roles=" + Roles +
+                ", roles=" + roles +
+                ", gmtCreate=" + gmtCreate +
                 ", gmtModfiy=" + gmtModfiy +
                 '}';
     }

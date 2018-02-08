@@ -1,11 +1,14 @@
 package com.ziniu;
 
+import cn.yeoman.demo.rmi.facade.DemoService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.remoting.rmi.RmiProxyFactoryBean;
 
 /**
  * Copyright © 2016年 author. All rights reserved.
@@ -25,5 +28,13 @@ public class Application extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder){
         return builder.sources(Application.class);
     }
+
+//    @Bean
+//    public RmiProxyFactoryBean rmiProxyFactoryBean(){
+//        RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
+//        rmiProxyFactoryBean.setServiceUrl("rmi://192.168.10.83:8082/demo");
+//        rmiProxyFactoryBean.setServiceInterface(DemoService.class);
+//        return rmiProxyFactoryBean;
+//    }
 
 }

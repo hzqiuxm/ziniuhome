@@ -3,17 +3,21 @@ package com.ziniu.control;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import com.ziniu.data.entity.Res;
 import com.ziniu.data.entity.Test;
+import com.ziniu.data.entity.User;
 import com.ziniu.data.repository.ResRepository;
 import com.ziniu.data.repository.TestRepository;
+import com.ziniu.service.ParamCheck;
+import com.ziziu.common.constants.ZiniuEnum;
 import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.remoting.rmi.RmiProxyFactoryBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 
@@ -22,8 +26,8 @@ import java.util.List;
  */
 @Controller
 @EnableEncryptableProperties
+@RequestMapping("/test/")
 public class TestController extends BaseController{
-
 
 	@GetMapping("/testGet")
     @ResponseBody
@@ -115,5 +119,20 @@ public class TestController extends BaseController{
         System.out.println(res);
         return getSuccessResult(res);
     }
+
+    @PostMapping("/add")
+    @ResponseBody
+    public ModelMap register(@Valid Test test) throws Exception {
+
+
+//        test.setStr("测试数据001");
+//        test.setNum(123456);
+        test.setNumLong(123456789);
+        test.setB((byte)5);
+        test.setGmt(new Date());
+        return getSuccessResult(testRepository.insert(test));
+    }
+
+
 
 }

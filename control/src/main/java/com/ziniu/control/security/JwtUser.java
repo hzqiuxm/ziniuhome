@@ -38,6 +38,7 @@ public class JwtUser extends User implements UserDetails {
                 .collect(Collectors.toList());
     }
 
+    @Override
     @JsonIgnore
     public String getId() {
         return id;
@@ -53,10 +54,12 @@ public class JwtUser extends User implements UserDetails {
         return loginName;
     }
 
+    @Override
     public String getShowName() {
         return showName;
     }
 
+    @Override
     public void setPassword(String password) {
         this.password = password;
     }

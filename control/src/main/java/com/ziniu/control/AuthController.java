@@ -3,6 +3,7 @@ package com.ziniu.control;
 import com.ziniu.control.security.JwtTokenUtil;
 import com.ziniu.control.security.JwtUser;
 import com.ziniu.data.entity.User;
+import com.ziniu.service.ParamCheck;
 import com.ziniu.service.interfaces.IUserService;
 import com.ziziu.common.Const;
 import com.ziziu.common.constants.ZiniuEnum;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Copyright © 2017年 ziniuxiaozhu. All rights reserved.
@@ -69,19 +71,19 @@ public class AuthController extends BaseController {
 
 
     @PostMapping("/register")
-    public ModelMap register(String loginName, String password, String showName){
-        if (StringUtils.isEmpty(loginName) || loginName.length() < 4 || loginName.length() > 40){
-            return getFailResult(Const.ReturnCode.F_201, "登录名不能为空，且长度不能小于4位或大于40位");
-        }
-        if(userService.exists(loginName)){
-            return getFailResult(ZiniuEnum.LOGINNAME_ALERDY_EXIST.getKey(), ZiniuEnum.LOGINNAME_ALERDY_EXIST.getValue());
-        }
-        if (StringUtils.isEmpty(password) || password.length() < 6 || password.length() > 32){
-            return getFailResult(Const.ReturnCode.F_201, "密码名不能为空，且长度不能小于6位或大于32位");
-        }
-        if (StringUtils.isEmpty(showName) || showName.length() > 6){
-            return getFailResult(Const.ReturnCode.F_201, "登录名不能为空，且长度不能大于6位");
-        }
+    public ModelMap register(String loginName, String password, String showName) throws Exception {
+//        if (StringUtils.isEmpty(loginName) || loginName.length() < 4 || loginName.length() > 40){
+//            return getFailResult(Const.ReturnCode.F_201, "登录名不能为空，且长度不能小于4位或大于40位");
+//        }
+//        if(userService.exists(loginName)){
+//            return getFailResult(ZiniuEnum.LOGINNAME_ALERDY_EXIST.getKey(), ZiniuEnum.LOGINNAME_ALERDY_EXIST.getValue());
+//        }
+//        if (StringUtils.isEmpty(password) || password.length() < 6 || password.length() > 32){
+//            return getFailResult(Const.ReturnCode.F_201, "密码名不能为空，且长度不能小于6位或大于32位");
+//        }
+//        if (StringUtils.isEmpty(showName) || showName.length() > 6){
+//            return getFailResult(Const.ReturnCode.F_201, "登录名不能为空，且长度不能大于6位");
+//        }
         User user = new User();
         user.setLoginName(loginName);
 
@@ -89,8 +91,12 @@ public class AuthController extends BaseController {
         user.setPassword(encoder.encode(password));
 
         user.setShowName(showName);
-        if (userService.addUser(user))
+
+        ParamCheck.validate(user);
+
+        if (userService.addUser(user)) {
             return getSuccessResult();
+        }
         return getFailResult(ZiniuEnum.LOGINING_ERROR.getKey(), ZiniuEnum.LOGINING_ERROR.getValue());
     }
 }

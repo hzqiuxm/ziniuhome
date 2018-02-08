@@ -5,6 +5,8 @@ import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -16,8 +18,11 @@ public class User {
     @Id
     protected String id;
     @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
+    @NotNull(message = "登录名不能为空")
     protected String loginName;
     protected String showName;
+    @NotNull(message = "密码不能为空")
+    @Size(min = 6,max = 32,message = "密码长度应该在6-32字符之间")
     protected String password;
     protected byte stage;
     protected List<String> roles;   //一个用户拥有的角色用一个list数组保存

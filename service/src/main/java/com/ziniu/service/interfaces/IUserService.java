@@ -36,4 +36,5 @@ public interface IUserService {
      * @return
      */
     boolean addUser(User user);
+
 }

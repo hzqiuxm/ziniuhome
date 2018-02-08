@@ -22,6 +22,15 @@ subprojects{
         springloadedVersion = '1.2.8.RELEASE'
     }
 
+    idea {
+        module {
+            inheritOutputDirs = false
+            outputDir = file("$buildDir/classes/main/")
+            testOutputDir = file("$buildDir/classes/test/")
+        }
+    }
+
+
     [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 
     repositories {

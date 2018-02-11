@@ -1,6 +1,5 @@
 package com.ziziu.common.exception;
 
-import com.ziziu.common.exception.ZiniuException;
 
 /**
  * @author shengwuyou

@@ -1,5 +1,5 @@
 plugins{
-    id 'org.springframework.boot' version '1.5.8.RELEASE'
+    id 'org.springframework.boot' version '1.5.9.RELEASE'
 }
 
 allprojects{
@@ -18,7 +18,7 @@ subprojects{
     targetCompatibility = 1.8
 
     ext {
-        springBootVersion = '1.5.8.RELEASE'
+        springBootVersion = '1.5.10.RELEASE'
         springloadedVersion = '1.2.8.RELEASE'
     }
 
@@ -40,4 +40,10 @@ subprojects{
         mavenCentral()
         jcenter()
     }
+    dependencies{
+        compile ("org.hibernate.validator:hibernate-validator:6.0.7.Final")
+        compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+
+    }
+
 }

@@ -17,6 +17,7 @@ project(':webapp'){
         providedCompile("org.springframework.boot:spring-boot-starter-tomcat")
         //providedCompile("org.springframework.boot:spring-boot-starter-jetty")
         compile("cn.yeoman.demo.rmi:facade:1.0")
+
     }
 }
 

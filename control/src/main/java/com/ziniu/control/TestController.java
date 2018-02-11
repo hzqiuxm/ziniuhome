@@ -3,18 +3,12 @@ package com.ziniu.control;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import com.ziniu.data.entity.Res;
 import com.ziniu.data.entity.Test;
-import com.ziniu.data.entity.User;
 import com.ziniu.data.repository.ResRepository;
 import com.ziniu.data.repository.TestRepository;
-import com.ziniu.service.ParamCheck;
-import com.ziziu.common.constants.ZiniuEnum;
 import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.remoting.rmi.RmiProxyFactoryBean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -125,11 +119,14 @@ public class TestController extends BaseController{
     public ModelMap register(@Valid Test test) throws Exception {
 
 
+        System.out.println(test);
 //        test.setStr("测试数据001");
 //        test.setNum(123456);
         test.setNumLong(123456789);
         test.setB((byte)5);
         test.setGmt(new Date());
+
+
         return getSuccessResult(testRepository.insert(test));
     }
 

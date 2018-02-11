@@ -107,4 +107,10 @@ public interface Const {
         /** 用户头像 */
         public static final String USER_AVATAR = "avatar/";
     }
+
+
+    final class ParamCheck{
+
+        public static final int PARAM_IVALID = 601;
+    }
 }

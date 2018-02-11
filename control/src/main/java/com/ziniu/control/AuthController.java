@@ -7,6 +7,7 @@ import com.ziniu.service.ParamCheck;
 import com.ziniu.service.interfaces.IUserService;
 import com.ziziu.common.Const;
 import com.ziziu.common.constants.ZiniuEnum;
+import com.ziziu.common.exception.ZiniuException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import javax.validation.Valid;
 
 /**
  * Copyright © 2017年 ziniuxiaozhu. All rights reserved.
@@ -71,7 +72,7 @@ public class AuthController extends BaseController {
 
 
     @PostMapping("/register")
-    public ModelMap register(String loginName, String password, String showName) throws Exception {
+    public ModelMap register(User dbUser) throws ZiniuException {
 //        if (StringUtils.isEmpty(loginName) || loginName.length() < 4 || loginName.length() > 40){
 //            return getFailResult(Const.ReturnCode.F_201, "登录名不能为空，且长度不能小于4位或大于40位");
 //        }
@@ -84,17 +85,18 @@ public class AuthController extends BaseController {
 //        if (StringUtils.isEmpty(showName) || showName.length() > 6){
 //            return getFailResult(Const.ReturnCode.F_201, "登录名不能为空，且长度不能大于6位");
 //        }
-        User user = new User();
-        user.setLoginName(loginName);
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setPassword(encoder.encode(password));
+//        ParamCheck.validate(user);
 
-        user.setShowName(showName);
+//        User dbUser = new User();
+//        dbUser.setLoginName(user.getLoginName());
+//
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        dbUser.setPassword(encoder.encode(user.getPassword()));
+//
+//        dbUser.setShowName(user.getShowName());
 
-        ParamCheck.validate(user);
-
-        if (userService.addUser(user)) {
+        if (userService.addUser(dbUser)) {
             return getSuccessResult();
         }
         return getFailResult(ZiniuEnum.LOGINING_ERROR.getKey(), ZiniuEnum.LOGINING_ERROR.getValue());

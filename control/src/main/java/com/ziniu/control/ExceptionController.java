@@ -24,7 +24,7 @@ public class ExceptionController extends BaseController{
     @ResponseBody
     public ModelMap exception(BindException exception, WebRequest webRequest){
 
-        System.out.println("=======ZiniuException======" + exception.getBindingResult().getFieldError().getDefaultMessage());
+        System.out.println("=======BindException======" + exception.getBindingResult().getFieldError().getDefaultMessage());
 
         return getFailResult(Const.ParamCheck.PARAM_IVALID,exception.getBindingResult().getFieldError().getDefaultMessage());
     }
